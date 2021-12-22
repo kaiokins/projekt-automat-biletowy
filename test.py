@@ -1,2 +1,2 @@
 import tkinter
-print("siema", "nice")
+print("siema", "test")
