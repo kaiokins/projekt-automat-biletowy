@@ -1,1 +1,2 @@
-print("siema")
+import tkinter
+print("siema", "nice")
