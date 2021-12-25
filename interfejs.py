@@ -1,3 +1,4 @@
+from types import LambdaType
 import biletomat
 from tkinter import *
 from oprogramowanie import pieniadze as p
@@ -8,16 +9,23 @@ biletomat = biletomat.Biletomat()
 print(biletomat.suma())
 
 bilet = [None for _ in range(6)]
-bilet[0] = Bilety("20 minut", "ulgowy", 1.50)
-bilet[1] = Bilety("40 minut", "ulgowy", 2.50)
-bilet[2] = Bilety("60 minut", "ulgowy", 3)
-bilet[3] = Bilety("20 minut", "normalny", 2.50)
-bilet[4] = Bilety("40 minut", "normalny", 4.30)
-bilet[5] = Bilety("60 minut", "normalny", 6)
+bilet[0] = Bilety("20 minut", "ulgowy", 1.50, 0)
+bilet[1] = Bilety("40 minut", "ulgowy", 2.50, 0)
+bilet[2] = Bilety("60 minut", "ulgowy", 3, 0)
+bilet[3] = Bilety("20 minut", "normalny", 2.50, 0)
+bilet[4] = Bilety("40 minut", "normalny", 4.30, 0)
+bilet[5] = Bilety("60 minut", "normalny", 6, 0)
 
 
 def action2():
     print("Działa")
+
+
+def dodajbilet(i, rodzaj):
+    bilet[i].dodajIlosc()
+    print(bilet[i].zwrocIlosc())
+    rodzaj.delete(0, END)
+    rodzaj.insert(0, bilet[i].zwrocIlosc())
 
 
 def otworzPlatnosci():
@@ -106,32 +114,38 @@ root.geometry("600x400")
 label = Label(root, text="Proszę wybrać rodzaj biletu", font=30)
 label.pack()
 
-ulg20b = Button(root, text="20-minutowy ulgowy [1,50 zł]", command=action2)
+ulg20b = Button(
+    root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: dodajbilet(0, ulg20i))
 ulg20i = Entry(root, width=5)
 ulg20b.pack()
 ulg20i.pack()
 
-ulg40b = Button(root, text="40-minutowy ulgowy [2,50 zł]", command=action2)
+ulg40b = Button(
+    root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: dodajbilet(1, ulg40i))
 ulg40i = Entry(root, width=5)
 ulg40b.pack()
 ulg40i.pack()
 
-ulg60b = Button(root, text="60-minutowy ulgowy [3 zł]", command=action2)
+ulg60b = Button(
+    root, text="60-minutowy ulgowy [3 zł]", command=lambda: dodajbilet(2, ulg60i))
 ulg60i = Entry(root, width=5)
 ulg60b.pack()
 ulg60i.pack()
 
-norm20b = Button(root, text="20-minutowy normalny [2,50 zł]", command=action2)
+norm20b = Button(
+    root, text="20-minutowy normalny [2,50 zł]", command=lambda: dodajbilet(3, norm20i))
 norm20i = Entry(root, width=5)
 norm20b.pack()
 norm20i.pack()
 
-norm40b = Button(root, text="40-minutowy normalny [4,30 zł]", command=action2)
+norm40b = Button(
+    root, text="40-minutowy normalny [4,30 zł]", command=lambda: dodajbilet(4, norm40i))
 norm40i = Entry(root, width=5)
 norm40b.pack()
 norm40i.pack()
 
-norm60b = Button(root, text="60-minutowy normalny [6 zł]", command=action2)
+norm60b = Button(
+    root, text="60-minutowy normalny [6 zł]", command=lambda: dodajbilet(5, norm60i))
 norm60i = Entry(root, width=5)
 norm60b.pack()
 norm60i.pack()
