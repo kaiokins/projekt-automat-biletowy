@@ -32,7 +32,10 @@ def otworzPlatnosci():
     # Okienka odpowiedzialne za platnosci
     root2 = Tk()
     root2.title("Zaplac za bilet")
-    root2.geometry("600x650")
+    root2.geometry("600x700")
+    label2 = Label(
+        root2, text="Do zapłacenia: ", font=30)
+    label2.pack()
     label = Label(
         root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
     label.pack()
