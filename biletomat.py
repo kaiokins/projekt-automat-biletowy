@@ -1,4 +1,4 @@
-import pieniadze as p
+from oprogramowanie import pieniadze as p
 
 
 class Biletomat(p.PrzechowywaczMonet):

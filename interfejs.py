@@ -1,4 +1,3 @@
-import oprogramowanie.biletomat
-import oprogramowanie.pieniadze
-
-print('test')
+import biletomat
+from oprogramowanie import pieniadze as p
+from oprogramowanie import bilet as b
