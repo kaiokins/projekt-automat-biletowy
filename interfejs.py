@@ -1,11 +1,19 @@
 import biletomat
 from tkinter import *
 from oprogramowanie import pieniadze as p
-from oprogramowanie import bilet as b
+from oprogramowanie.bilet import Bilety
 from wyjatki import wyjatki as w
 
 biletomat = biletomat.Biletomat()
 print(biletomat.suma())
+
+bilet = [None for _ in range(6)]
+bilet[0] = Bilety("20 minut", "ulgowy", 1.50)
+bilet[1] = Bilety("40 minut", "ulgowy", 2.50)
+bilet[2] = Bilety("60 minut", "ulgowy", 3)
+bilet[3] = Bilety("20 minut", "normalny", 2.50)
+bilet[4] = Bilety("40 minut", "normalny", 4.30)
+bilet[5] = Bilety("60 minut", "normalny", 6)
 
 
 def action2():
@@ -16,7 +24,7 @@ def otworzPlatnosci():
     # Okienka odpowiedzialne za platnosci
     root2 = Tk()
     root2.title("Zaplac za bilet")
-    root2.geometry("600x600")
+    root2.geometry("600x650")
     label = Label(
         root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
     label.pack()
@@ -98,32 +106,32 @@ root.geometry("600x400")
 label = Label(root, text="Proszę wybrać rodzaj biletu", font=30)
 label.pack()
 
-ulg20b = Button(root, text="20-minutowy ulgowy", command=action2)
+ulg20b = Button(root, text="20-minutowy ulgowy [1,50 zł]", command=action2)
 ulg20i = Entry(root, width=5)
 ulg20b.pack()
 ulg20i.pack()
 
-ulg40b = Button(root, text="40-minutowy ulgowy", command=action2)
+ulg40b = Button(root, text="40-minutowy ulgowy [2,50 zł]", command=action2)
 ulg40i = Entry(root, width=5)
 ulg40b.pack()
 ulg40i.pack()
 
-ulg60b = Button(root, text="60-minutowy ulgowy", command=action2)
+ulg60b = Button(root, text="60-minutowy ulgowy [3 zł]", command=action2)
 ulg60i = Entry(root, width=5)
 ulg60b.pack()
 ulg60i.pack()
 
-norm20b = Button(root, text="20-minutowy normalny", command=action2)
+norm20b = Button(root, text="20-minutowy normalny [2,50 zł]", command=action2)
 norm20i = Entry(root, width=5)
 norm20b.pack()
 norm20i.pack()
 
-norm40b = Button(root, text="40-minutowy normalny", command=action2)
+norm40b = Button(root, text="40-minutowy normalny [4,30 zł]", command=action2)
 norm40i = Entry(root, width=5)
 norm40b.pack()
 norm40i.pack()
 
-norm60b = Button(root, text="60-minutowy normalny", command=action2)
+norm60b = Button(root, text="60-minutowy normalny [6 zł]", command=action2)
 norm60i = Entry(root, width=5)
 norm60b.pack()
 norm60i.pack()
