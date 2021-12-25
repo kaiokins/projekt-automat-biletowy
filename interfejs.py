@@ -1,6 +1,6 @@
 from types import LambdaType
 from decimal import *
-from math import *
+import math
 import biletomat
 from tkinter import *
 from oprogramowanie import pieniadze as p
@@ -23,13 +23,19 @@ def action2():
     print("Działa")
 
 
+podsumowanieZakupow = 0
+
+
 def doZaplaty(i):
+    global podsumowanieZakupow
     if bilet[i].zwrocIlosc() == 0:
         pass
     elif bilet[i].zwrocIlosc() < 0:
         bilet[i].dodajbilet(i)
     else:
-        print(round(3, bilet[i].zwrocIlosc()*bilet[i].zwrocCene()))
+        print(round(bilet[i].zwrocIlosc()*bilet[i].zwrocCene(), 5))
+    podsumowanieZakupow = podsumowanieZakupow + \
+        round(bilet[i].zwrocCene(), 5)
 
 
 def otworzPlatnosci():
@@ -38,7 +44,7 @@ def otworzPlatnosci():
     root2.title("Zaplac za bilet")
     root2.geometry("600x700")
     label2 = Label(
-        root2, text="Do zapłacenia: ", font=30)
+        root2, text="Do zapłacenia: " + str(round(podsumowanieZakupow, 5)) + " zł", font=30)
     label2.pack()
     label = Label(
         root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
@@ -123,9 +129,12 @@ label.pack()
 
 ulg20b = Button(
     root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajbilet(0, ulg20i), doZaplaty(0)])
+wstawulg20b = Button(
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[0].dodajBiletPole(0, ulg20i, int(ulg20i.get())), doZaplaty(0)])
 ulg20i = Entry(root, width=5)
 ulg20b.pack()
 ulg20i.pack()
+wstawulg20b.pack()
 
 ulg40b = Button(
     root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajbilet(1, ulg40i), doZaplaty(1)])
