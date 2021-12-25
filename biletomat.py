@@ -11,6 +11,3 @@ class Biletomat(p.PrzechowywaczMonet):
 
     def wplacMonety(self, gr1, gr2, gr5, gr10, gr20, gr50, zl1, zl2, zl5, zl10, zl20, zl50):
         print("elo")
-
-        # a = Biletomat()
-        # print(a.suma())

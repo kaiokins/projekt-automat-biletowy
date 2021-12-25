@@ -11,7 +11,13 @@ class Bilety:
     def zwrocIlosc(self):
         return self._ile
 
+    def zwrocCene(self):
+        return self._cena
+
     def dodajIlosc(self):
+        self._ile += 1
+
+    def dodajbilet(self, i):
         self._ile += 1
 
     def dodajbilet(self, i, rodzaj):
