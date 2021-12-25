@@ -7,6 +7,7 @@ class Bilety:
         self._rodzaj = rodzaj
         self._cena = cena
         self._ile = ile
+        self._podsumowanie = 0
 
     def zwrocIlosc(self):
         return self._ile
@@ -32,3 +33,6 @@ class Bilety:
             self._ile = ilosc
         typ.delete(0, END)
         typ.insert(0, self._ile)
+
+    def jakiKoszt(self):
+        return self._ile * self._cena
