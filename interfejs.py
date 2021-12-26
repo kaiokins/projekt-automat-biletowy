@@ -48,9 +48,20 @@ def doZaplatyPole(i, ilosc):
         print(round(int(ulg20i.get())*bilet[i].zwrocCene(), 5))
 
 
+def sprawdzLiczbe(zmienna):
+    try:
+        return int(zmienna.get())
+    except:
+        return 0
+
+# window_status = 0
+
+
 def otworzPlatnosci():
     # Okienka odpowiedzialne za platnosci
     root2 = Tk()
+    # global window_status
+    # if window_status == 0:
     root2.title("Zaplac za bilet")
     root2.geometry("600x700")
     label2 = Label(
@@ -125,7 +136,14 @@ def otworzPlatnosci():
 
     oblicz = Button(root2, text="Oblicz", command=action2)
     oblicz.pack()
+    # window_status = 1
+    # print("STATUS:", window_status)
     root2.mainloop()
+    # else:
+    # window_status = 0
+    # root2.destroy()
+    # print("STATUS:", window_status)
+    # otworzPlatnosci()
 
 
 root = Tk()
@@ -139,7 +157,7 @@ label.pack()
 ulg20b = Button(
     root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajbilet(0, ulg20i), doZaplaty(0)])
 wstawulg20b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[0].dodajBiletPole(0, ulg20i, int(ulg20i.get())), doZaplatyPole(0, int(ulg20i.get()))])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[0].dodajBiletPole(0, ulg20i, sprawdzLiczbe(ulg20i)), doZaplatyPole(0, int(ulg20i.get()))])
 ulg20i = Entry(root, width=5)
 ulg20b.pack()
 ulg20i.pack()
@@ -148,7 +166,7 @@ wstawulg20b.pack()
 ulg40b = Button(
     root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajbilet(1, ulg40i), doZaplaty(1)])
 wstawulg40b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[1].dodajBiletPole(1, ulg40i, int(ulg40i.get())), doZaplatyPole(1, int(ulg40i.get()))])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[1].dodajBiletPole(1, ulg40i, sprawdzLiczbe(ulg40i)), doZaplatyPole(1, int(ulg40i.get()))])
 ulg40i = Entry(root, width=5)
 ulg40b.pack()
 ulg40i.pack()
@@ -157,7 +175,7 @@ wstawulg40b.pack()
 ulg60b = Button(
     root, text="60-minutowy ulgowy [3 zł]", command=lambda: [bilet[2].dodajbilet(2, ulg60i), doZaplaty(2)])
 wstawulg60b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[2].dodajBiletPole(2, ulg60i, int(ulg60i.get())), doZaplatyPole(2, int(ulg60i.get()))])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[2].dodajBiletPole(2, ulg60i, sprawdzLiczbe(ulg60i)), doZaplatyPole(2, int(ulg60i.get()))])
 ulg60i = Entry(root, width=5)
 ulg60b.pack()
 ulg60i.pack()
@@ -166,7 +184,7 @@ wstawulg60b.pack()
 norm20b = Button(
     root, text="20-minutowy normalny [2,25 zł]", command=lambda: [bilet[3].dodajbilet(3, norm20i), doZaplaty(3)])
 wstawnorm20b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[3].dodajBiletPole(3, norm20i, int(norm20i.get())), doZaplatyPole(3, int(norm20i.get()))])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[3].dodajBiletPole(3, norm20i, sprawdzLiczbe(norm20i)), doZaplatyPole(3, int(norm20i.get()))])
 norm20i = Entry(root, width=5)
 norm20b.pack()
 norm20i.pack()
@@ -175,7 +193,7 @@ wstawnorm20b.pack()
 norm40b = Button(
     root, text="40-minutowy normalny [4,40 zł]", command=lambda: [bilet[4].dodajbilet(4, norm40i), doZaplaty(4)])
 wstawnorm40b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[4].dodajBiletPole(4, norm40i, int(norm40i.get())), doZaplatyPole(4, int(norm40i.get()))])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[4].dodajBiletPole(4, norm40i, sprawdzLiczbe(norm40i)), doZaplatyPole(4, int(norm40i.get()))])
 norm40i = Entry(root, width=5)
 norm40b.pack()
 norm40i.pack()
@@ -184,7 +202,7 @@ wstawnorm40b.pack()
 norm60b = Button(
     root, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajbilet(5, norm60i), doZaplaty(5)])
 wstawnorm60b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[5].dodajBiletPole(5, norm60i, int(norm60i.get())), doZaplatyPole(5, int(norm60i.get()))])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[5].dodajBiletPole(5, norm60i, sprawdzLiczbe(norm60i)), doZaplatyPole(5, int(norm60i.get()))])
 norm60i = Entry(root, width=5)
 norm60b.pack()
 norm60i.pack()
