@@ -201,7 +201,8 @@ def otworzPlatnosci():
     zl50i.pack()
     wstawzl50b.pack()
 
-    zaplac = Button(root2, text="Zapłać", command=action2)
+    zaplac = Button(root2, text="Zapłać",
+                    command=lambda: [biletomat.zaplac(zwrocCene())])
     zaplac.pack()
 
     # window_status = 1
