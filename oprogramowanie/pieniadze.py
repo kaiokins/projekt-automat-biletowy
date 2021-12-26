@@ -21,7 +21,7 @@ class PrzechowywaczMonet:
 
         moneta.reverse()
         ilosc.reverse()
-
+        doWydania = doWydania*100
         reszta = [0] * 12
         print('ILE DO WYDANIA', doWydania)
         for i in range(12):
@@ -29,7 +29,7 @@ class PrzechowywaczMonet:
                 doWydania -= int(moneta[i])
                 ilosc[i] -= 1
                 reszta[i] += 1
-                print("TU TEŻ", moneta[i])
+                print("TYLE ODJĄŁ", moneta[i])
             print("TU", doWydania)
 
         moneta.reverse()
@@ -38,6 +38,8 @@ class PrzechowywaczMonet:
 
         zostalo = dict(zip(moneta, ilosc))
         reszta = dict(zip(moneta, reszta))
+        print("zostalo", zostalo)
+        print("reszta", reszta)
 
         if doWydania == 0:
             return (zostalo, reszta)
