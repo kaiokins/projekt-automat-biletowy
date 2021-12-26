@@ -60,7 +60,7 @@ def sprawdzLiczbe(zmienna):
 # Funkcje po stronie wpłacania
 
 
-# def doZaplatyDepo(i, ilosc):
+#  def doZaplatyDepo(i, ilosc):
     # if bilet[i].zwrocIlosc() == 0:
       # pass
    # elif bilet[i].zwrocIlosc() < 0:
@@ -88,7 +88,7 @@ def otworzPlatnosci():
     wplacono.pack()
 
     gr1b = Button(root2, text="1 grosz",
-                  command=lambda: [biletomat.dodajDoDepozytu('1', 1), wplaconychDoDepo()])
+                  command=lambda: [biletomat.dodajDoDepozytu('1', 1, gr1i), wplaconychDoDepo()])
     wstawgr1b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr1i, '1', sprawdzLiczbe(gr1i)), wplaconychDoDepo()])
     gr1i = Entry(root2, width=5)
@@ -97,7 +97,7 @@ def otworzPlatnosci():
     wstawgr1b.pack()
 
     gr2b = Button(root2, text="2 grosze", command=lambda: [
-                  biletomat.dodajDoDepozytu('2', 1), wplaconychDoDepo()])
+                  biletomat.dodajDoDepozytu('2', 1, gr2i), wplaconychDoDepo()])
     wstawgr2b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr2i, '2', sprawdzLiczbe(gr2i)), wplaconychDoDepo()])
     gr2i = Entry(root2, width=5)
@@ -106,7 +106,7 @@ def otworzPlatnosci():
     wstawgr2b.pack()
 
     gr5b = Button(root2, text="5 groszy",
-                  command=lambda: [biletomat.dodajDoDepozytu('5', 1), wplaconychDoDepo()])
+                  command=lambda: [biletomat.dodajDoDepozytu('5', 1, gr5i), wplaconychDoDepo()])
     wstawgr5b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr5i, '5', sprawdzLiczbe(gr5i)), wplaconychDoDepo()])
     gr5i = Entry(root2, width=5)
@@ -115,7 +115,7 @@ def otworzPlatnosci():
     wstawgr5b.pack()
 
     gr10b = Button(root2, text="10 groszy",
-                   command=lambda: [biletomat.dodajDoDepozytu('10', 1), wplaconychDoDepo()])
+                   command=lambda: [biletomat.dodajDoDepozytu('10', 1, gr10i), wplaconychDoDepo()])
     wstawgr10b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr10i, '10', sprawdzLiczbe(gr10i)), wplaconychDoDepo()])
     gr10i = Entry(root2, width=5)
@@ -124,7 +124,7 @@ def otworzPlatnosci():
     wstawgr10b.pack()
 
     gr20b = Button(root2, text="20 groszy",
-                   command=lambda: [biletomat.dodajDoDepozytu('20', 1), wplaconychDoDepo()])
+                   command=lambda: [biletomat.dodajDoDepozytu('20', 1, gr20i), wplaconychDoDepo()])
     wstawgr20b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr20i, '20', sprawdzLiczbe(gr20i)), wplaconychDoDepo()])
     gr20i = Entry(root2, width=5)
@@ -133,7 +133,7 @@ def otworzPlatnosci():
     wstawgr20b.pack()
 
     gr50b = Button(root2, text="50 groszy",
-                   command=lambda: [biletomat.dodajDoDepozytu('50', 1), wplaconychDoDepo()])
+                   command=lambda: [biletomat.dodajDoDepozytu('50', 1, gr50i), wplaconychDoDepo()])
     wstawgr50b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr50i, '50', sprawdzLiczbe(gr50i)), wplaconychDoDepo()])
     gr50i = Entry(root2, width=5)
@@ -142,7 +142,7 @@ def otworzPlatnosci():
     wstawgr50b.pack()
 
     zl1b = Button(root2, text="1 złoty",
-                  command=lambda: [biletomat.dodajDoDepozytu('100', 1), wplaconychDoDepo()])
+                  command=lambda: [biletomat.dodajDoDepozytu('100', 1, zl1i), wplaconychDoDepo()])
     wstawzl1b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(zl1i, '100', sprawdzLiczbe(zl1i)), wplaconychDoDepo()])
     zl1i = Entry(root2, width=5)
@@ -151,7 +151,7 @@ def otworzPlatnosci():
     wstawzl1b.pack()
 
     zl2b = Button(root2, text="2 złote",
-                  command=lambda: [biletomat.dodajDoDepozytu('200', 1), wplaconychDoDepo()])
+                  command=lambda: [biletomat.dodajDoDepozytu('200', 1, zl2i), wplaconychDoDepo()])
     wstawzl2b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(zl2i, '200', sprawdzLiczbe(zl2i)), wplaconychDoDepo()])
     zl2i = Entry(root2, width=5)
@@ -160,7 +160,7 @@ def otworzPlatnosci():
     wstawzl2b.pack()
 
     zl5b = Button(root2, text="5 złotych",
-                  command=lambda: [biletomat.dodajDoDepozytu('500', 1), wplaconychDoDepo()])
+                  command=lambda: [biletomat.dodajDoDepozytu('500', 1, zl5i), wplaconychDoDepo()])
     wstawzl5b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(zl5i, '500', sprawdzLiczbe(zl5i)), wplaconychDoDepo()])
     zl5i = Entry(root2, width=5)
@@ -169,7 +169,7 @@ def otworzPlatnosci():
     wstawzl5b.pack()
 
     zl10b = Button(root2, text="10 złotych",
-                   command=lambda: [biletomat.dodajDoDepozytu('1000', 1), wplaconychDoDepo()])
+                   command=lambda: [biletomat.dodajDoDepozytu('1000', 1, zl10i), wplaconychDoDepo()])
     wstawzl10b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(zl10i, '1000', sprawdzLiczbe(zl10i)), wplaconychDoDepo()])
     zl10i = Entry(root2, width=5)
@@ -178,7 +178,7 @@ def otworzPlatnosci():
     wstawzl10b.pack()
 
     zl20b = Button(root2, text="20 złotych",
-                   command=lambda: [biletomat.dodajDoDepozytu('2000', 1), wplaconychDoDepo()])
+                   command=lambda: [biletomat.dodajDoDepozytu('2000', 1, zl20i), wplaconychDoDepo()])
     wstawzl20b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(zl20i, '2000', sprawdzLiczbe(zl20i)), wplaconychDoDepo()])
     zl20i = Entry(root2, width=5)
@@ -187,7 +187,7 @@ def otworzPlatnosci():
     wstawzl20b.pack()
 
     zl50b = Button(root2, text="50 złotych",
-                   command=lambda: [biletomat.dodajDoDepozytu('5000', 1), wplaconychDoDepo()])
+                   command=lambda: [biletomat.dodajDoDepozytu('5000', 1, zl50i), wplaconychDoDepo()])
     wstawzl50b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(zl50i, '5000', sprawdzLiczbe(zl50i)), wplaconychDoDepo()])
     zl50i = Entry(root2, width=5)

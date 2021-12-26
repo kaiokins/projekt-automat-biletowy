@@ -8,9 +8,11 @@ class Biletomat(p.PrzechowywaczMonet):
         self._depozyt = {'1': 0, '2': 0, '5': 0, '10': 0, '20': 0, '50': 0,
                          '100': 0, '200': 0, '500': 0, '1000': 0, '2000': 0, '5000': 0}
 
-    def dodajDoDepozytu(self, rodzaj, ile):
+    def dodajDoDepozytu(self, rodzaj, ile, typ):
         self._depozyt[rodzaj] = self._depozyt[rodzaj] + ile
-        print(self._depozyt[rodzaj])
+        print("DEPO", self._depozyt[rodzaj])
+        typ.delete(0, END)
+        typ.insert(0, self._depozyt[rodzaj])
 
     def dodajMonetePole(self, typ, rodzaj, ilosc):
         if ilosc < 0:
