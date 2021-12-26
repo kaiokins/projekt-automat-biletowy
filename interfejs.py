@@ -10,16 +10,14 @@ from wyjatki import wyjatki as w
 biletomat = biletomat.Biletomat()
 print(biletomat.suma())
 
-monety = [None for _ in range(6)]
-monety[0] = Decimal('4.40')
 
 bilet = [None for _ in range(6)]
-bilet[0] = Bilety("20 minut", "ulgowy", 1.50, 0)
-bilet[1] = Bilety("40 minut", "ulgowy", 2.50, 0)
-bilet[2] = Bilety("60 minut", "ulgowy", 3, 0)
-bilet[3] = Bilety("20 minut", "normalny", 2.25, 0)
-bilet[4] = Bilety("40 minut", "normalny", monety[0], 0)
-bilet[5] = Bilety("60 minut", "normalny", 6, 0)
+bilet[0] = Bilety("20 minut", "ulgowy", Decimal('1.50'), 0)
+bilet[1] = Bilety("40 minut", "ulgowy", Decimal('2.50'), 0)
+bilet[2] = Bilety("60 minut", "ulgowy", Decimal('3'), 0)
+bilet[3] = Bilety("20 minut", "normalny", Decimal('2.25'), 0)
+bilet[4] = Bilety("40 minut", "normalny", Decimal('4.40'), 0)
+bilet[5] = Bilety("60 minut", "normalny", Decimal('6'), 0)
 
 
 def action2():
@@ -39,7 +37,7 @@ def zwrocCene():
     suma = 0
     for i in range(len(bilet)):
         suma = suma + bilet[i].zwrocCene()*bilet[i].zwrocIlosc()
-    return round(suma, 3)
+    return suma
 
 
 def doZaplatyPole(i, ilosc):
