@@ -41,18 +41,17 @@ class Biletomat(p.PrzechowywaczMonet):
         self._wartosc[i] = wartosc
 
     def zaplac(self, kwotaZakupu):
-        if self.sumaDepo() > kwotaZakupu or self.sumaDepo() == kwotaZakupu:
+        if self.sumaDepo() > kwotaZakupu:
 
             doWydania = self.sumaDepo() - kwotaZakupu
 
-            if(doWydania == 0):
-                print("Dziękujemy za zakup")
+            if self.wydajReszte(doWydania) != -1:
+                print("Dam rade wydac")
+            else:
+                print("Sorry, ale nie dam rady wydac")
 
-            for i in self._depozyt.keys():
-                self.dodajDoPrzechowywacza(i)
-
-        elif self.sumaDepo() < kwotaZakupu:
-            print('WIĘCEJ NOOBIE')
+        elif self.sumaDepo() == kwotaZakupu:
+            print('Idealnie')
 
         else:
-            print("ZA DUŻO NOOBIE")
+            print("Za mało")

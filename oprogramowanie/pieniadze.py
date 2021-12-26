@@ -1,7 +1,7 @@
 class PrzechowywaczMonet:
     def __init__(self):
-        self._pieniadze = {'1': 0, '2': 3, '5': 0, '10': 0, '20': 0, '50': 0,
-                           '100': 1, '200': 3, '500': 0, '1000': 0, '2000': 3, '5000': 0}
+        self._pieniadze = {'1': 55, '2': 55, '5': 56, '10': 52, '20': 65, '50': 25,
+                           '100': 25, '200': 25, '500': 85, '1000': 55, '2000': 55, '5000': 35}
         self._sumaPojemnika = 0
 
     def suma(self):
@@ -17,7 +17,29 @@ class PrzechowywaczMonet:
 
     def wydajReszte(self, doWydania):
         moneta = list(self._pieniadze.keys())
-        ilosc = list(self._ilosc.values())
+        ilosc = list(self._pieniadze.values())
 
         moneta.reverse()
         ilosc.reverse()
+
+        reszta = [0] * 12
+        print('ILE DO WYDANIA', doWydania)
+        for i in range(12):
+            while not ((int(moneta[i])) > doWydania) and ilosc[i] > 0:
+                doWydania -= int(moneta[i])
+                ilosc[i] -= 1
+                reszta[i] += 1
+                print("TU TEŻ", moneta[i])
+            print("TU", doWydania)
+
+        moneta.reverse()
+        ilosc.reverse()
+        reszta.reverse()
+
+        zostalo = dict(zip(moneta, ilosc))
+        reszta = dict(zip(moneta, reszta))
+
+        if doWydania == 0:
+            return (zostalo, reszta)
+        else:
+            return -1

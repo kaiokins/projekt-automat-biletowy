@@ -282,7 +282,7 @@ wstawnorm40b.pack()
 norm60b = Button(
     root, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajbilet(5, norm60i), doZaplaty(5), kosztZakupow()])
 wstawnorm60b = Button(
-    root, text="Dodaj z pola wpisania", command=lambda: [bilet[5].dodajBiletPole(5, norm60i, sprawdzLiczbe(norm60i, blad_biletow), doZaplatyPole(5, int(norm60i.get())), kosztZakupow())])
+    root, text="Dodaj z pola wpisania", command=lambda: [bilet[5].dodajBiletPole(4, norm60i, sprawdzLiczbe(norm60i, blad_biletow)), doZaplatyPole(5, int(norm60i.get())), kosztZakupow()])
 norm60i = Entry(root, width=5)
 norm60b.pack()
 norm60i.pack()
