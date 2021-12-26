@@ -58,12 +58,12 @@ def sprawdzLiczbe(zmienna):
 # window_status = 0
 
 
-def wplaconychDoDepo():
-    label2['text'] = "Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł"
-
-
 def otworzPlatnosci():
     # Okienka odpowiedzialne za platnosci
+
+    def wplaconychDoDepo():
+        wplacono['text'] = "Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł"
+
     root2 = Tk()
     # global window_status
     # if window_status == 0:
@@ -72,9 +72,9 @@ def otworzPlatnosci():
     label = Label(
         root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
     label.pack()
-    label2 = Label(
+    wplacono = Label(
         root2, text="Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł", font=30)
-    label2.pack()
+    wplacono.pack()
 
     gr1b = Button(root2, text="1 grosz",
                   command=lambda: [biletomat.dodajDoDepozytu('1', 1), wplaconychDoDepo()])
@@ -83,67 +83,67 @@ def otworzPlatnosci():
     gr1i.pack()
 
     gr2b = Button(root2, text="2 grosze", command=lambda: [
-                  biletomat.dodajDoDepozytu('2', 1)])
+                  biletomat.dodajDoDepozytu('2', 1), wplaconychDoDepo()])
     gr2i = Entry(root2, width=5)
     gr2b.pack()
     gr2i.pack()
 
     gr5b = Button(root2, text="5 groszy",
-                  command=lambda: [biletomat.dodajDoDepozytu('5', 1)])
+                  command=lambda: [biletomat.dodajDoDepozytu('5', 1), wplaconychDoDepo()])
     gr5i = Entry(root2, width=5)
     gr5b.pack()
     gr5i.pack()
 
     gr10b = Button(root2, text="10 groszy",
-                   command=lambda: [biletomat.dodajDoDepozytu('10', 1)])
+                   command=lambda: [biletomat.dodajDoDepozytu('10', 1), wplaconychDoDepo()])
     gr10i = Entry(root2, width=5)
     gr10b.pack()
     gr10i.pack()
 
     gr20b = Button(root2, text="20 groszy",
-                   command=lambda: [biletomat.dodajDoDepozytu('20', 1)])
+                   command=lambda: [biletomat.dodajDoDepozytu('20', 1), wplaconychDoDepo()])
     gr20i = Entry(root2, width=5)
     gr20b.pack()
     gr20i.pack()
 
     gr50b = Button(root2, text="50 groszy",
-                   command=lambda: [biletomat.dodajDoDepozytu('50', 1)])
+                   command=lambda: [biletomat.dodajDoDepozytu('50', 1), wplaconychDoDepo()])
     gr50i = Entry(root2, width=5)
     gr50b.pack()
     gr50i.pack()
 
     zl1b = Button(root2, text="1 złoty",
-                  command=lambda: [biletomat.dodajDoDepozytu('100', 1)])
+                  command=lambda: [biletomat.dodajDoDepozytu('100', 1), wplaconychDoDepo()])
     zl1i = Entry(root2, width=5)
     zl1b.pack()
     zl1i.pack()
 
     zl2b = Button(root2, text="2 złote",
-                  command=lambda: [biletomat.dodajDoDepozytu('200', 1)])
+                  command=lambda: [biletomat.dodajDoDepozytu('200', 1), wplaconychDoDepo()])
     zl2i = Entry(root2, width=5)
     zl2b.pack()
     zl2i.pack()
 
     zl5b = Button(root2, text="5 złotych",
-                  command=lambda: [biletomat.dodajDoDepozytu('500', 1)])
+                  command=lambda: [biletomat.dodajDoDepozytu('500', 1), wplaconychDoDepo()])
     zl5i = Entry(root2, width=5)
     zl5b.pack()
     zl5i.pack()
 
     zl10b = Button(root2, text="10 złotych",
-                   command=lambda: [biletomat.dodajDoDepozytu('1000', 1)])
+                   command=lambda: [biletomat.dodajDoDepozytu('1000', 1), wplaconychDoDepo()])
     zl10i = Entry(root2, width=5)
     zl10b.pack()
     zl10i.pack()
 
     zl20b = Button(root2, text="20 złotych",
-                   command=lambda: [biletomat.dodajDoDepozytu('2000', 1)])
+                   command=lambda: [biletomat.dodajDoDepozytu('2000', 1), wplaconychDoDepo()])
     zl20i = Entry(root2, width=5)
     zl20b.pack()
     zl20i.pack()
 
     zl50b = Button(root2, text="50 złotych",
-                   command=lambda: [biletomat.dodajDoDepozytu('5000', 1)])
+                   command=lambda: [biletomat.dodajDoDepozytu('5000', 1), wplaconychDoDepo()])
     zl50i = Entry(root2, width=5)
     zl50b.pack()
     zl50i.pack()
