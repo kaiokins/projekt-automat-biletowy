@@ -1,6 +1,7 @@
 from oprogramowanie import pieniadze as p
 from tkinter import *
 from oprogramowanie import bilet
+from decimal import *
 
 
 class Biletomat(p.PrzechowywaczMonet):
@@ -26,9 +27,8 @@ class Biletomat(p.PrzechowywaczMonet):
     def sumaDepo(self):  # to potem bedzie mozna nadpisac, sprobowac, dac suma
         """Zwraca sumę monet w złotówkach"""
         suma = 0
-
         for key, value in self._depozyt.items():
-            suma += int(key)*value
+            suma += int(key)*Decimal(value)
         return suma/100
 
     def wyciagWartosc(self, i):
@@ -40,5 +40,7 @@ class Biletomat(p.PrzechowywaczMonet):
     def zaplac(self, function):
         if self.sumaDepo() == function:
             print('TYLE SAMO')
+        elif self.sumaDepo() < function:
+            print('WIĘCEJ NOOBIE')
         else:
-            print('NIE TYLE SAMO')
+            print("ZA DUŻO NOOBIE")
