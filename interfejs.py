@@ -131,7 +131,7 @@ def otworzPlatnosci():
 
 root = Tk()
 root.title("Automat biletowy MPK")
-root.geometry("600x400")
+root.geometry("600x650")
 
 # Okienka odpowiedzialne za automat biletowy
 label = Label(root, text="Proszę wybrać rodzaj biletu", font=30)
