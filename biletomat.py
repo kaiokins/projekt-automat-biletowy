@@ -1,4 +1,5 @@
 from oprogramowanie import pieniadze as p
+from tkinter import *
 
 
 class Biletomat(p.PrzechowywaczMonet):
@@ -10,6 +11,14 @@ class Biletomat(p.PrzechowywaczMonet):
     def dodajDoDepozytu(self, rodzaj, ile):
         self._depozyt[rodzaj] = self._depozyt[rodzaj] + ile
         print(self._depozyt[rodzaj])
+
+    def dodajMonetePole(self, typ, rodzaj, ilosc):
+        if ilosc < 0:
+            pass
+        else:
+            self._depozyt[rodzaj] = ilosc
+        typ.delete(0, END)
+        typ.insert(0, self._depozyt[rodzaj])
 
     def sumaDepo(self):  # to potem bedzie mozna nadpisac, sprobowac, dac suma
         """Zwraca sumę monet w złotówkach"""
