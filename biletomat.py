@@ -16,6 +16,9 @@ class Biletomat(p.PrzechowywaczMonet):
         typ.delete(0, END)
         typ.insert(0, self._depozyt[rodzaj])
 
+    def dodajDoPrzechowywacza(self, i):
+        self._pieniadze[i] += self._depozyt[i]
+
     def dodajMonetePole(self, typ, rodzaj, ilosc):
         if ilosc < 0:
             pass
@@ -37,10 +40,19 @@ class Biletomat(p.PrzechowywaczMonet):
     def wprowadzWartosc(self, i, wartosc):
         self._wartosc[i] = wartosc
 
-    def zaplac(self, function):
-        if self.sumaDepo() == function:
-            print('TYLE SAMO')
-        elif self.sumaDepo() < function:
+    def zaplac(self, kwotaZakupu):
+        if self.sumaDepo() > kwotaZakupu or self.sumaDepo() == kwotaZakupu:
+
+            doWydania = self.sumaDepo() - kwotaZakupu
+
+            if(doWydania == 0):
+                print("Dziękujemy za zakup")
+
+            for i in self._depozyt.keys():
+                self.dodajDoPrzechowywacza(i)
+
+        elif self.sumaDepo() < kwotaZakupu:
             print('WIĘCEJ NOOBIE')
+
         else:
             print("ZA DUŻO NOOBIE")

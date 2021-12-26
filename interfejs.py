@@ -81,7 +81,7 @@ def otworzPlatnosci():
     # global window_status
     # if window_status == 0:
     root2.title("Zaplac za bilet")
-    root2.geometry("600x850")
+    root2.geometry("600x1000")
     label = Label(
         root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
     label.pack()
@@ -292,5 +292,5 @@ podsumowanie = Button(root, text="Podsumuj",
                       command=lambda: [otworzPlatnosci()])
 podsumowanie.pack()
 
-
 root.mainloop()
+print("Ostateczna suma: ", biletomat.suma())

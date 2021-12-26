@@ -14,3 +14,10 @@ class PrzechowywaczMonet:
         return suma/100
         # a = PrzechowywaczMonet()
         # print(a.suma())
+
+    def wydajReszte(self, doWydania):
+        moneta = list(self._pieniadze.keys())
+        ilosc = list(self._ilosc.values())
+
+        moneta.reverse()
+        ilosc.reverse()
