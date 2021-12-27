@@ -27,7 +27,7 @@ def zwrocCene():
     return suma
 
 
-def informacjaZakupowa():
+def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
     oknoZakupowe = Tk()
     oknoZakupowe.title("Zaplac za bilet")
     oknoZakupowe.geometry("600x300")
@@ -49,6 +49,8 @@ def informacjaZakupowa():
         jakieBiletyZakupil['text'] = info + "\n Wydano " + \
             str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
         jakieBiletyZakupil.pack()
+        zamknijOknoBiletow.destroy()
+        zamknijOknoPlatnosci.destroy()
 
     elif biletomat.pobierzInformacje() == 2:
         oknoZakupowe['text'] = "Tylko odliczona kwota, zwracam pieniądze"
@@ -231,7 +233,7 @@ def otworzPlatnosci():
     wstawzl50b.pack()
 
     zaplac = Button(root2, text="Zapłać",
-                    command=lambda: [biletomat.zaplac(zwrocCene()), informacjaZakupowa()])
+                    command=lambda: [biletomat.zaplac(zwrocCene()), informacjaZakupowa(root, root2)])
 
     zaplac.pack()
 
@@ -323,4 +325,3 @@ podsumowanie = Button(root, text="Podsumuj",
 podsumowanie.pack()
 
 root.mainloop()
-print("Ostateczna suma: ", biletomat.suma())
