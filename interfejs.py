@@ -12,24 +12,44 @@ print(biletomat.suma())
 
 
 bilet = [None for _ in range(6)]
-bilet[0] = Bilety("20 minut", "ulgowy", Decimal('1.50'), 0)
-bilet[1] = Bilety("40 minut", "ulgowy", Decimal('2.50'), 0)
-bilet[2] = Bilety("60 minut", "ulgowy", Decimal('3'), 0)
-bilet[3] = Bilety("20 minut", "normalny", Decimal('2.25'), 0)
-bilet[4] = Bilety("40 minut", "normalny", Decimal('4.40'), 0)
-bilet[5] = Bilety("60 minut", "normalny", Decimal('6'), 0)
+bilet[0] = Bilety("20 minutowy", "ulgowy", Decimal('1.50'), 0)
+bilet[1] = Bilety("40 minutowy", "ulgowy", Decimal('2.50'), 0)
+bilet[2] = Bilety("60 minutowy", "ulgowy", Decimal('3'), 0)
+bilet[3] = Bilety("20 minutowy", "normalny", Decimal('2.25'), 0)
+bilet[4] = Bilety("40 minutowy", "normalny", Decimal('4.40'), 0)
+bilet[5] = Bilety("60 minutowy", "normalny", Decimal('6'), 0)
+
+
+def zwrocCene():
+    suma = 0
+    for i in range(len(bilet)):
+        suma = suma + bilet[i].zwrocCene()*bilet[i].zwrocIlosc()
+    return suma
 
 
 def informacjaZakupowa():
     oknoZakupowe = Tk()
     oknoZakupowe.title("Zaplac za bilet")
     oknoZakupowe.geometry("600x300")
-    oknoZakupowe = Label(
+    czyKupil = Label(
         oknoZakupowe, text="", font=30)
-    oknoZakupowe.pack()
+    jakieBiletyZakupil = Label(oknoZakupowe, font=15)
+    czyKupil.pack()
+    jakieBiletyZakupil.pack()
 
     if biletomat.pobierzInformacje() == 1:
-        oknoZakupowe['text'] = "Dziękujemy za zakup biletów"
+        czyKupil['text'] = "Dziękujemy za zakup biletów. Zakupiłeś:"
+        info = ''
+        for i in range(6):
+            if bilet[i].zwrocIlosc() > 0:
+                info += "Bilet " + bilet[i].zwrocNazwe() + " " + \
+                    bilet[i].zwrocRodzaj() + " w ilości sztuk: " + \
+                    str(bilet[i].zwrocIlosc()) + "\n"
+
+        jakieBiletyZakupil['text'] = info + "\n Wydano " + \
+            str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
+        jakieBiletyZakupil.pack()
+
     elif biletomat.pobierzInformacje() == 2:
         oknoZakupowe['text'] = "Tylko odliczona kwota, zwracam pieniądze"
     elif biletomat.pobierzInformacje() == 3:
@@ -47,13 +67,6 @@ def doZaplaty(i):
         bilet[i].dodajbilet(i)
     # else:
         # print(round(bilet[i].zwrocIlosc()*bilet[i].zwrocCene(), 5))
-
-
-def zwrocCene():
-    suma = 0
-    for i in range(len(bilet)):
-        suma = suma + bilet[i].zwrocCene()*bilet[i].zwrocIlosc()
-    return suma
 
 
 def doZaplatyPole(i, ilosc):
@@ -119,7 +132,7 @@ def otworzPlatnosci():
     wstawgr1b.pack()
 
     gr2b = Button(root2, text="2 grosze", command=lambda: [
-                  biletomat.dodajDoDepozytu('2', 1, gr2i), wplaconychDoDepo()])
+        biletomat.dodajDoDepozytu('2', 1, gr2i), wplaconychDoDepo()])
     wstawgr2b = Button(
         root2, text="Dodaj z pola wpisania", command=lambda: [biletomat.dodajMonetePole(gr2i, '2', sprawdzLiczbe(gr2i, blad_platnosci)), wplaconychDoDepo()])
     gr2i = Entry(root2, width=5)

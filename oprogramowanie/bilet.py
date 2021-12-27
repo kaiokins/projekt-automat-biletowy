@@ -9,6 +9,12 @@ class Bilety:
         self._ile = ile
         self._podsumowanie = 0
 
+    def zwrocNazwe(self):
+        return self._nazwa
+
+    def zwrocRodzaj(self):
+        return self._rodzaj
+
     def zwrocIlosc(self):
         return self._ile
 
