@@ -20,6 +20,24 @@ bilet[4] = Bilety("40 minut", "normalny", Decimal('4.40'), 0)
 bilet[5] = Bilety("60 minut", "normalny", Decimal('6'), 0)
 
 
+def informacjaZakupowa():
+    oknoZakupowe = Tk()
+    oknoZakupowe.title("Zaplac za bilet")
+    oknoZakupowe.geometry("600x300")
+    oknoZakupowe = Label(
+        oknoZakupowe, text="", font=30)
+    oknoZakupowe.pack()
+
+    if biletomat.pobierzInformacje() == 1:
+        oknoZakupowe['text'] = "Dziękujemy za zakup biletów"
+    elif biletomat.pobierzInformacje() == 2:
+        oknoZakupowe['text'] = "Tylko odliczona kwota, zwracam pieniądze"
+    elif biletomat.pobierzInformacje() == 3:
+        oknoZakupowe['text'] = "Wrzuciłeś za mało banknotów"
+
+    oknoZakupowe.mainloop()
+
+
 def doZaplaty(i):
     if bilet[i].zwrocIlosc() == 0:
         pass
@@ -34,10 +52,6 @@ def zwrocCene():
     for i in range(len(bilet)):
         suma = suma + bilet[i].zwrocCene()*bilet[i].zwrocIlosc()
     return suma
-
-
-def doZaplatyOstatecznie():
-    return biletomat.zaplac(zwrocCene())
 
 
 def doZaplatyPole(i, ilosc):
@@ -200,10 +214,9 @@ def otworzPlatnosci():
     zl50b.pack()
     zl50i.pack()
     wstawzl50b.pack()
-    x = 0
 
     zaplac = Button(root2, text="Zapłać",
-                    command=lambda: [doZaplatyOstatecznie()])
+                    command=lambda: [biletomat.zaplac(zwrocCene()), informacjaZakupowa()])
 
     zaplac.pack()
 

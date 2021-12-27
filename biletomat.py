@@ -9,6 +9,7 @@ class Biletomat(p.PrzechowywaczMonet):
         super().__init__()
         self._depozyt = {'1': 0, '2': 0, '5': 0, '10': 0, '20': 0, '50': 0,
                          '100': 0, '200': 0, '500': 0, '1000': 0, '2000': 0, '5000': 0}
+        self._informacja = 0
 
     def dodajDoDepozytu(self, rodzaj, ile, typ):
         self._depozyt[rodzaj] = self._depozyt[rodzaj] + ile
@@ -46,9 +47,14 @@ class Biletomat(p.PrzechowywaczMonet):
             doWydania = self.sumaDepo() - kwotaZakupu
 
             if self.wydajReszte(doWydania) != -1:
+                self._informacja = 1
                 print("Dziekujemy za zakup")
             else:
+                self._informacja = 2
                 print("Tylko odliczona kwota, zwracam pieniądze")
         else:
+            self._informacja = 3
             print("Wrzuciłeś za mało banknotów")
-            return 5
+
+    def pobierzInformacje(self):
+        return self._informacja
