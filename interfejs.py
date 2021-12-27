@@ -34,6 +34,8 @@ def informacjaZakupowa():
         oknoZakupowe['text'] = "Tylko odliczona kwota, zwracam pieniądze"
     elif biletomat.pobierzInformacje() == 3:
         oknoZakupowe['text'] = "Wrzuciłeś za mało banknotów"
+    else:
+        oknoZakupowe['text'] = "Upsss... coś poszło źle"
 
     oknoZakupowe.mainloop()
 
