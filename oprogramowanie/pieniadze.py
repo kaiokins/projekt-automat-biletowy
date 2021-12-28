@@ -1,8 +1,9 @@
 class PrzechowywaczMonet:
     def __init__(self):
-        self._pieniadze = {'1': 0, '2': 55, '5': 56, '10': 52, '20': 65, '50': 25,
-                           '100': 25, '200': 25, '500': 85, '1000': 55, '2000': 55, '5000': 35}
+        self._pieniadze = {'1': 55, '2': 55, '5': 55, '10': 55, '20': 55, '50': 55,
+                           '100': 55, '200': 55, '500': 55, '1000': 55, '2000': 55, '5000': 55}
         self._sumaPojemnika = 0
+        self._doUsunieciaZPrzechowywacza = 0
 
     def suma(self):
         """Zwraca sumę monet w złotówkach"""
@@ -42,6 +43,7 @@ class PrzechowywaczMonet:
         print("reszta", reszta)
 
         if doWydania == 0:
+            self._pieniadze = zostalo
             return (zostalo, reszta)
         else:
             return -1

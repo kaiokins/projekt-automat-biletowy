@@ -49,6 +49,9 @@ class Biletomat(p.PrzechowywaczMonet):
             if self.wydajReszte(doWydania) != -1:
                 self._informacja = 1
                 print("Dziekujemy za zakup")
+                for i in self._pieniadze.keys():
+                    self._pieniadze[i] = self._pieniadze[i] + self._depozyt[i]
+                print("OSTATECZNIE: ", self._pieniadze)
             else:
                 self._informacja = 2
                 print("Tylko odliczona kwota, zwracam pieniądze")
