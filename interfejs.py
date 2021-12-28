@@ -59,7 +59,9 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
         jakieBiletyZakupil['text'] = "Tylko odliczona kwota. Zwracam " + \
             str(biletomat.sumaDepo()) + " zł reszty"
         jakieBiletyZakupil.pack()
-
+        biletomat.oddajMonety()
+        biletomat.wyczyscDepozyt()
+        print("ODDAJE: ", biletomat.oddajMonety())
         zamknijOkno()
     elif biletomat.pobierzInformacje() == 3:
         jakieBiletyZakupil['text'] = "Wrzuciłeś za mało banknotów. Brakuje " + \

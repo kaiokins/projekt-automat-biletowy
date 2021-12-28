@@ -58,3 +58,10 @@ class Biletomat(p.PrzechowywaczMonet):
 
     def pobierzInformacje(self):
         return self._informacja
+
+    def oddajMonety(self):
+        return self._depozyt
+
+    def wyczyscDepozyt(self):
+        for key in self._depozyt.keys():
+            self._depozyt[key] = 0
