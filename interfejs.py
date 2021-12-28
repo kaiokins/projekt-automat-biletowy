@@ -37,6 +37,10 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
     czyKupil.pack()
     jakieBiletyZakupil.pack()
 
+    def zamknijOkno():
+        zamknijOknoBiletow.destroy()
+        zamknijOknoPlatnosci.destroy()
+
     if biletomat.pobierzInformacje() == 1:
         czyKupil['text'] = "Dziękujemy za zakup biletów. Zakupiłeś:"
         info = ''
@@ -49,15 +53,20 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
         jakieBiletyZakupil['text'] = info + "\n Wydano " + \
             str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
         jakieBiletyZakupil.pack()
-        zamknijOknoBiletow.destroy()
-        zamknijOknoPlatnosci.destroy()
+        zamknijOkno()
 
     elif biletomat.pobierzInformacje() == 2:
-        oknoZakupowe['text'] = "Tylko odliczona kwota, zwracam pieniądze"
+        jakieBiletyZakupil['text'] = "Tylko odliczona kwota. Zwracam " + \
+            str(biletomat.sumaDepo()) + " zł reszty"
+        jakieBiletyZakupil.pack()
+        zamknijOkno()
     elif biletomat.pobierzInformacje() == 3:
-        oknoZakupowe['text'] = "Wrzuciłeś za mało banknotów"
+        jakieBiletyZakupil['text'] = "Wrzuciłeś za mało banknotów. Brakuje " + \
+            str(math.fabs(biletomat.sumaDepo() - zwrocCene())) + " zł"
     else:
-        oknoZakupowe['text'] = "Upsss... coś poszło źle"
+        jakieBiletyZakupil['text'] = "Upsss... coś poszło źle"
+        jakieBiletyZakupil.pack()
+        zamknijOkno()
 
     oknoZakupowe.mainloop()
 
