@@ -49,10 +49,11 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
                 info += "Bilet " + bilet[i].zwrocNazwe() + " " + \
                     bilet[i].zwrocRodzaj() + " w ilości sztuk: " + \
                     str(bilet[i].zwrocIlosc()) + "\n"
-
+    
         jakieBiletyZakupil['text'] = info + "\n Wydano " + \
             str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
         jakieBiletyZakupil.pack()
+
         zamknijOkno()
 
     elif biletomat.pobierzInformacje() == 2:
@@ -61,7 +62,7 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
         jakieBiletyZakupil.pack()
         biletomat.oddajMonety()
         biletomat.wyczyscDepozyt()
-        print("ODDAJE: ", biletomat.oddajMonety())
+        # print("ODDAJE: ", biletomat.oddajMonety())
         zamknijOkno()
     elif biletomat.pobierzInformacje() == 3:
         jakieBiletyZakupil['text'] = "Wrzuciłeś za mało banknotów. Brakuje " + \
