@@ -1,26 +1,29 @@
 import csv
+from typing import final
 
 
 class PrzechowywaczMonet:
     def wczytajPlik(self):
         try:
-            f = csv.reader(
-                open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv'))
-            self._pieniadze = dict(f)
-            for i in self._pieniadze.keys():
-                self._pieniadze[i] = int(self._pieniadze[i])
-            print("ZAIMPORTOWANE: ", self._pieniadze)
+            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv', mode='r') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    k, v = row
+                    self._pieniadze[str(k)] = int(v)
         except:
-            print("Nie udało się wczytaj pliku")
-        f.close()
+            print("Wystąpił błąd przy wczytywaniu pliku")
+        finally:
+            f.close()
 
     def zapiszPlik(self):
-
-        with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv', "w") as f:
-            zapis = csv.writer(f)
-            for key, value in self._pieniadze.items():
-                zapis.writerow([key, value])
-            print("ZAPISANE")
+        try:
+            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv', mode='w') as f:
+                [f.write('{0},{1}\n'.format(key, value))
+                 for key, value in self._pieniadze.items()]
+        except:
+            print("Wystąpił błąd przy wczytywaniu pliku")
+        finally:
+            f.close()
 
     def __init__(self):
         self._pieniadze = {}
