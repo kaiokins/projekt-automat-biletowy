@@ -1,12 +1,11 @@
 import csv
 from typing import final
-import ..wyjatki
 
 
 class PrzechowywaczMonet:
     def wczytajPlik(self):
         try:
-            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv', mode='r') as f:
+            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/oprogramowanie/pieniadze.csv', mode='r') as f:
                 reader = csv.reader(f)
                 for row in reader:
                     k, v = row
@@ -18,7 +17,7 @@ class PrzechowywaczMonet:
 
     def zapiszPlik(self):
         try:
-            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv', mode='w') as f:
+            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/oprogramowanie/pieniadze.csv', mode='w') as f:
                 [f.write('{0},{1}\n'.format(key, value))
                  for key, value in self._pieniadze.items()]
         except:
