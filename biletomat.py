@@ -2,6 +2,7 @@ from oprogramowanie import pieniadze as p
 from tkinter import *
 from oprogramowanie import bilet
 from decimal import *
+from wyjatki import wyjatki
 
 
 class Biletomat(p.PrzechowywaczMonet):
