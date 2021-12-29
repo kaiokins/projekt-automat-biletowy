@@ -1,22 +1,33 @@
-
 import csv
 
 
 class PrzechowywaczMonet:
+    def wczytajPlik(self):
+        try:
+            f = csv.reader(
+                open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv'))
+            self._pieniadze = dict(f)
+            for i in self._pieniadze.keys():
+                self._pieniadze[i] = int(self._pieniadze[i])
+            print("ZAIMPORTOWANE: ", self._pieniadze)
+        except:
+            print("Nie udało się wczytaj pliku")
+        f.close()
+
+    def zapiszPlik(self):
+
+        with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/pieniadze.csv', "w") as f:
+            zapis = csv.writer(f)
+            for key, value in self._pieniadze.items():
+                zapis.writerow([key, value])
+            print("ZAPISANE")
+
     def __init__(self):
-        self._pieniadze = {'1': 55, '2': 55, '5': 55, '10': 55, '20': 55, '50': 55,
-                           '100': 55, '200': 55, '500': 55, '1000': 55, '2000': 55, '5000': 55}
+        self._pieniadze = {}
+        # self._pieniadze = {'1': 55, '2': 55, '5': 55, '10': 55, '20': 55, '50': 55, '100': 55, '200': 55, '500': 55, '1000': 55, '2000': 55, '5000': 55}
         self._sumaPojemnika = 0
         self._doUsunieciaZPrzechowywacza = 0
-
-    try:
-        with open('pieniadze.csv', newline='') as f:
-            for line in f:
-                (key, val) = line.split()
-                self._pieniadze[str(key)] = val
-        print("ZAIMPORTOWANE: ", self._pieniadze)
-    except:
-        print("elo")
+        self.wczytajPlik()
 
     def suma(self):
         """Zwraca sumę monet w złotówkach"""

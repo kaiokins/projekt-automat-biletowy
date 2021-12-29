@@ -52,6 +52,7 @@ class Biletomat(p.PrzechowywaczMonet):
                 print("Dziekujemy za zakup")
                 for i in self._pieniadze.keys():
                     self._pieniadze[i] = self._pieniadze[i] + self._depozyt[i]
+                self.zapiszPlik()
                 print("OSTATECZNIE: ", self._pieniadze)
             else:
                 self._informacja = 2
