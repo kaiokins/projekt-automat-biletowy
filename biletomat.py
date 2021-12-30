@@ -1,8 +1,6 @@
 from oprogramowanie import pieniadze as p
 from tkinter import *
-from oprogramowanie import bilet
 from decimal import *
-from wyjatki import wyjatki
 
 
 class Biletomat(p.PrzechowywaczMonet):
@@ -33,8 +31,8 @@ class Biletomat(p.PrzechowywaczMonet):
         """Zwraca sumę monet w złotówkach"""
         suma = 0
         for key, value in self._depozyt.items():
-            suma += int(key)*Decimal(value)
-        return suma/100
+            suma += int(key) * Decimal(value)
+        return suma / 100
 
     def wyciagWartosc(self, i):
         return self._depozyt[i]

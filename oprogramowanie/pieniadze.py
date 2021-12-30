@@ -1,5 +1,4 @@
 import csv
-from typing import final
 
 
 class PrzechowywaczMonet:
@@ -21,7 +20,7 @@ class PrzechowywaczMonet:
                 [f.write('{0},{1}\n'.format(key, value))
                  for key, value in self._pieniadze.items()]
         except:
-            print("Wystąpił błąd przy wczytywaniu pliku")
+            print("Wystąpił błąd przy zapisywaniu pliku")
         finally:
             f.close()
 

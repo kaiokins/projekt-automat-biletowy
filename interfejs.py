@@ -1,12 +1,10 @@
-from types import LambdaType
 from decimal import *
 import math
 import biletomat
 from tkinter import *
-from oprogramowanie import pieniadze as p
 from oprogramowanie.bilet import Bilety
 from wyjatki import wyjatki as w
-from oprogramowanie import przedmiot
+from datetime import datetime
 
 biletomat = biletomat.Biletomat()
 print(biletomat.suma())
@@ -268,13 +266,23 @@ def otworzPlatnosci():
     # print("STATUS:", window_status)
     # otworzPlatnosci()
 
+def ktoraGodzina(func):
+    now = datetime.now()
+    def wrapper(tekst):
+        tekst['text'] = "Jest godzina " + now.strftime("%H:%M") + "\n" + func(tekst)
+    return wrapper
+
+@ktoraGodzina
+def powitaj(tekst):
+    return "Proszę wybrać rodzaj biletu"
 
 root = Tk()
 root.title("Automat biletowy MPK")
 root.geometry("600x650")
 
 # Okienka odpowiedzialne za automat biletowy
-label = Label(root, text="Proszę wybrać rodzaj biletu", font=30)
+label = Label(root, font=30)
+powitaj(label)
 label.pack()
 blad_biletow = Label(root, text="", font=30)
 blad_biletow.pack()
