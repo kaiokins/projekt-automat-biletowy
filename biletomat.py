@@ -50,8 +50,10 @@ class Biletomat(p.PrzechowywaczMonet):
             if self.wydajReszte(doWydania) != -1:
                 self._informacja = 1
                 print("Dziekujemy za zakup")
-                for i in self._pieniadze.keys():
-                    self._pieniadze[i] = self._pieniadze[i] + self._depozyt[i]
+                # for i in self._pieniadze.keys():
+                # self._pieniadze[i] = self._pieniadze[i] + self._depozyt[i]
+                self._pieniadze = {
+                    i: self._pieniadze[i] + self._depozyt[i] for i in self._pieniadze.keys()}
                 self.zapiszPlik()
                 print("OSTATECZNIE: ", self._pieniadze)
             else:
@@ -68,5 +70,6 @@ class Biletomat(p.PrzechowywaczMonet):
         return self._depozyt
 
     def wyczyscDepozyt(self):
-        for key in self._depozyt.keys():
-            self._depozyt[key] = 0
+        self._depozyt = {key: 0 for key in self._depozyt}
+        # for key in self._depozyt.keys():
+        # self._depozyt[key] = 0
