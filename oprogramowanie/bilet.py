@@ -1,13 +1,10 @@
 from tkinter import *
+from oprogramowanie import przedmiot
 
 
-class Bilety():
+class Bilety(przedmiot.Przedmiot):
     def __init__(self, nazwa, rodzaj, cena, ile):
-        # super().__init__(self, nazwa, rodzaj)
-        self._nazwa = nazwa
-        self._rodzaj = rodzaj
-        self._cena = cena
-        self._ile = ile
+        przedmiot.Przedmiot.__init__(self, nazwa, rodzaj, cena, ile)
         self._podsumowanie = 0
 
     def zwrocNazwe(self):
