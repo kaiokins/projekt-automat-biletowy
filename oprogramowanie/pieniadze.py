@@ -1,5 +1,6 @@
 import csv
 from typing import final
+from wyjatki import wyjatki
 
 
 class PrzechowywaczMonet:
