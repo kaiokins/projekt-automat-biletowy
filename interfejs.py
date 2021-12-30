@@ -110,10 +110,13 @@ def sprawdzLiczbe(zmienna, blad):
     try:
         blad['text'] = ""
         if int(zmienna.get()) < 0:
-            raise w.bladWartosci("LOG: Błąd wartości")
+            raise w.bladUjemnaWartosc("LOG: Podano ujemną wartość")
         return int(zmienna.get())
-    except w.bladWartosci as e:
+    except w.bladUjemnaWartosc as e:
         print(e)
+        blad['text'] = "Podałeś ujemną wartość"
+        return 0
+    except:
         blad['text'] = "Podałeś nieprawidłową wartość"
         return 0
 
