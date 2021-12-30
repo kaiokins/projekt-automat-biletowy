@@ -6,6 +6,7 @@ from tkinter import *
 from oprogramowanie import pieniadze as p
 from oprogramowanie.bilet import Bilety
 from wyjatki import wyjatki as w
+from oprogramowanie import przedmiot
 
 biletomat = biletomat.Biletomat()
 print(biletomat.suma())

@@ -1,8 +1,9 @@
 from tkinter import *
 
 
-class Bilety:
+class Bilety():
     def __init__(self, nazwa, rodzaj, cena, ile):
+        # super().__init__(self, nazwa, rodzaj)
         self._nazwa = nazwa
         self._rodzaj = rodzaj
         self._cena = cena
