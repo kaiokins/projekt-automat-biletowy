@@ -109,8 +109,11 @@ def doZaplatyPole(i, ilosc):
 def sprawdzLiczbe(zmienna, blad):
     try:
         blad['text'] = ""
+        if int(zmienna.get()) < 0:
+            raise w.bladWartosci("LOG: Błąd wartości")
         return int(zmienna.get())
-    except:
+    except w.bladWartosci as e:
+        print(e)
         blad['text'] = "Podałeś nieprawidłową wartość"
         return 0
 
