@@ -42,6 +42,8 @@ class PrzechowywaczMonet:
         # a = PrzechowywaczMonet()
         # print(a.suma())
 
+
+
     def wydajReszte(self, doWydania):
         moneta = list(self._pieniadze.keys())
         ilosc = list(self._pieniadze.values())

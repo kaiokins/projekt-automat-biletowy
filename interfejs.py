@@ -12,13 +12,21 @@ print(biletomat.suma())
 tekstGuzikaDodaj = "+"
 (lambda tekstGuzikaDodaj: print(tekstGuzikaDodaj))
 
+def generujLiczby(x):
+    i = 0
+    while i < x:
+        yield i
+        i += 1
+
+generujLiczbeBiletow = generujLiczby(6)
+
 bilet = [None for _ in range(6)]
-bilet[0] = Bilety("20 minutowy", "ulgowy", Decimal('1.50'), 0)
-bilet[1] = Bilety("40 minutowy", "ulgowy", Decimal('2.50'), 0)
-bilet[2] = Bilety("60 minutowy", "ulgowy", Decimal('3'), 0)
-bilet[3] = Bilety("20 minutowy", "normalny", Decimal('2.25'), 0)
-bilet[4] = Bilety("40 minutowy", "normalny", Decimal('4.40'), 0)
-bilet[5] = Bilety("60 minutowy", "normalny", Decimal('6'), 0)
+bilet[next(generujLiczbeBiletow)] = Bilety("20 minutowy", "ulgowy", Decimal('1.50'), 0)
+bilet[next(generujLiczbeBiletow)] = Bilety("40 minutowy", "ulgowy", Decimal('2.50'), 0)
+bilet[next(generujLiczbeBiletow)] = Bilety("60 minutowy", "ulgowy", Decimal('3'), 0)
+bilet[next(generujLiczbeBiletow)] = Bilety("20 minutowy", "normalny", Decimal('2.25'), 0)
+bilet[next(generujLiczbeBiletow)] = Bilety("40 minutowy", "normalny", Decimal('4.40'), 0)
+bilet[next(generujLiczbeBiletow)] = Bilety("60 minutowy", "normalny", Decimal('6'), 0)
 
 
 def zwrocCene():
