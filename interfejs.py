@@ -6,6 +6,7 @@ from oprogramowanie.bilet import Bilety
 from wyjatki import wyjatki as w
 from datetime import datetime
 
+# Utworzenie obiektu biletomat
 biletomat = biletomat.Biletomat()
 print(biletomat.suma())
 
@@ -20,6 +21,7 @@ def generujLiczby(x):
 
 generujLiczbeBiletow = generujLiczby(6)
 
+# Tworzenie obiektów klasy Bilet.
 bilet = [None for _ in range(6)]
 bilet[next(generujLiczbeBiletow)] = Bilety("20 minutowy", "ulgowy", Decimal('1.50'), 0)
 bilet[next(generujLiczbeBiletow)] = Bilety("40 minutowy", "ulgowy", Decimal('2.50'), 0)
@@ -30,6 +32,7 @@ bilet[next(generujLiczbeBiletow)] = Bilety("60 minutowy", "normalny", Decimal('6
 
 
 def zwrocCene():
+    """Funkcja zwraca cenę biletów wybranych przez użytkownika (sumuje)"""
     suma = 0
     for i in range(len(bilet)):
         suma = suma + bilet[i].zwrocCene()*bilet[i].zwrocIlosc()
@@ -37,6 +40,10 @@ def zwrocCene():
 
 
 def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
+    """
+    Funkcja odpowiedzialna za otwieranie okna po kliknięciu przycisku zapłać.
+    Wyświetla informację na temat zakupów.
+    """
     oknoZakupowe = Tk()
     oknoZakupowe.title("Zaplac za bilet")
     oknoZakupowe.geometry("600x300")
@@ -47,10 +54,13 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
     jakieBiletyZakupil.pack()
 
     def zamknijOkno():
+        """Zamyka okno biletów oraz płatności po naciśnięciu przycisku zapłać"""
         zamknijOknoBiletow.destroy()
         zamknijOknoPlatnosci.destroy()
 
     if biletomat.pobierzInformacje() == 1:
+        # Wyświetla podsumowanie zakupów. Ile biletów danego rodzaju użytkownik zakupił
+        # oraz ile zwrócono mu reszty
         czyKupil['text'] = "Dziękujemy za zakup biletów. Zakupiłeś:"
         info = ''
         for i in range(6):
@@ -64,8 +74,9 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
         jakieBiletyZakupil.pack()
 
         zamknijOkno()
-
     elif biletomat.pobierzInformacje() == 2:
+        # W przypadku gdy automat nie może wydać reszty informuje użytkownika
+        # oraz zostają mu zwrócone pieniądze
         jakieBiletyZakupil['text'] = "Tylko odliczona kwota. Zwracam " + \
             str(biletomat.sumaDepo()) + " zł reszty"
         jakieBiletyZakupil.pack()
@@ -74,6 +85,8 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
         # print("ODDAJE: ", biletomat.oddajMonety())
         zamknijOkno()
     elif biletomat.pobierzInformacje() == 3:
+        # Gdy klient wrzuci za mało banknotów to zostanie o tym poinformowany.
+        # Wyświetli się informacje ile jeszcze należy wrzucić.
         jakieBiletyZakupil['text'] = "Wrzuciłeś za mało banknotów. Brakuje " + \
             str(math.fabs(biletomat.sumaDepo() - zwrocCene())) + " zł"
     else:
@@ -116,6 +129,15 @@ def doZaplatyPole(i, ilosc):
 
 
 def sprawdzLiczbe(zmienna, blad):
+    """
+    Funkcja odpowiedzialna za sprawdzenie, czy użytkownik podał odpowiednią
+    liczbę przy wprowadzaniu liczby biletów lub nominałów.
+    """
+
+    # Gdy podana zostanie wartośc mniejsza od zera zostanie wyświetlony błąd w konsoli
+    # dla administratora (użycie klasy wyjątku). Gdy użytkownik poda dowolną inną wartość
+    # na przykład literę to zostanie wyświetlony błąd o nieprawidłowej wartości. Dodatkowo
+    # użytkownik zostanie poinformowany o takim błędzie w okienku biletów/płatności.
     try:
         blad['text'] = ""
         if int(zmienna.get()) < 0:
@@ -131,27 +153,38 @@ def sprawdzLiczbe(zmienna, blad):
 
 
 def otworzPlatnosci():
-    # Okienka odpowiedzialne za platnosci
+    """
+    Funkcja odpowiada za otwarcie okienka z płatnościami,
+    gdzie użytkownik może wybrać nominały oraz ilośc,którymi chce zapłacić.
+    """
 
     def wplaconychDoDepo():
+        """Funkcja informująca w okienku użytkownika o sumie wpłaconych pieniędzy"""
         wplacono['text'] = "Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł"
 
+    # Utworzenie okienka z płatnościami
     root2 = Tk()
     # global window_status
     # if window_status == 0:
     root2.title("Zaplac za bilet")
     root2.geometry("600x1000")
-    label = Label(
-        root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
+    label = Label(root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
     label.pack()
 
     blad_platnosci = Label(root2, text="", font=30)
     blad_platnosci.pack()
 
-    wplacono = Label(
-        root2, text="Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł", font=30)
+    wplacono = Label(root2, text="Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł", font=30)
     wplacono.pack()
 
+    # Poniżej utworzone są przyciski/pola "input", które wywołują odpowiednie funkcje po naciśnięciu ich. Pozostałe są tworzone na podobne zasadzie.
+    # Zmienne tworzyłem by bylo potem lepiej identyfikować dany przycisk dla przykładu gr1b oznacza gr - grosz, 1 - 1 zł, b - button.
+    # zl20i to zl - złotówka, 20 - 20 zł, i - pole typu input. Na przykładzie jednego przycisku opiszę ich działanie. Zmienna gr1b zawiera przycisk,
+    # która wywołuje funkcję dodajDoDepozytu z obiektu biletomat. Do funkcji podawane są odpowiednie parametry, dzięki którym można zidentyfikować,
+    # które dane mają być przekazane oraz na jakich należy operować. W dwóch pierwszych parametrach podaję rodzaje nominału, a na końcu z pola input
+    # odczytuję ilość tych monet. Funkcja wpłaconychDoDepo odpowiedzialna jest za wyświetlenie sumy wpłaconych pieniędzy. Zmienna wstawgr1b to zmienna
+    # zawierająca gucik z napisem "+". Użytkownik, gdy chce wprowadzić dowolną ilość biletów to może wpisać je do pola input i potem dodać przyciskiem "+".
+    # Zawiera funkcję dodajmonetePole, do której przekazuje kolejno pole "input" czyli ile biletów mamy wpłacić.
     gr1b = Button(root2, text="1 grosz",
                   command=lambda: [biletomat.dodajDoDepozytu('1', 1, gr1i), wplaconychDoDepo()])
     wstawgr1b = Button(
