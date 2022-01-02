@@ -60,10 +60,13 @@ class PrzechowywaczMonet:
         moneta.reverse()
         ilosc.reverse()
 
-        #Przez to, że 
         doWydania = doWydania*100
         reszta = [0] * 12
         print('ILE DO WYDANIA', doWydania)
+
+        # Pętla, która iteruje po ilości rodzajów monet/banknotów. Dopóki w przechowywaczu mamy dostępne nominały
+        # lub możemy wydać to wydajemy w ten sposób resztę użytkownikowi. Dla przykładu użytkownik kupi 2 bilety
+        # o sumie 12 złotych i zapłaci 50-złotówką to wydamy mu 20, 10, 5, 2, 1 zł reszty.
         for i in range(12):
             while not ((int(moneta[i])) > doWydania) and ilosc[i] > 0:
                 doWydania -= int(moneta[i])
@@ -76,11 +79,14 @@ class PrzechowywaczMonet:
         ilosc.reverse()
         reszta.reverse()
 
+        # Łączymy rodzaj oraz ilość nominałów za pomocą funkcji zip do słownika.
         zostalo = dict(zip(moneta, ilosc))
         reszta = dict(zip(moneta, reszta))
         print("zostalo", zostalo)
         print("reszta", reszta)
 
+        # Jeśli pieniadze uda się wydać to zwracamy je razem z tym co zostało,
+        # w przeciwnym wypadku wracamy -1
         if doWydania == 0:
             self._pieniadze = zostalo
             return (zostalo, reszta)
