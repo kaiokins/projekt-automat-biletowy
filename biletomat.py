@@ -25,8 +25,8 @@ class Biletomat(p.PrzechowywaczMonet):
         typ.delete(0, END)
         typ.insert(0, self._depozyt[rodzaj])
 
-    def dodajDoPrzechowywacza(self, i):
-        self._pieniadze[i] += self._depozyt[i]
+    # def dodajDoPrzechowywacza(self, i):
+        # self._pieniadze[i] += self._depozyt[i]
 
     def dodajMonetePole(self, typ, rodzaj, ilosc):
         """
@@ -48,11 +48,11 @@ class Biletomat(p.PrzechowywaczMonet):
             suma += int(key) * Decimal(value)
         return suma / 100
 
-    def wyciagWartosc(self, i):
-        return self._depozyt[i]
+    # def wyciagWartosc(self, i):
+        # return self._depozyt[i]
 
-    def wprowadzWartosc(self, i, wartosc):
-        self._wartosc[i] = wartosc
+   # def wprowadzWartosc(self, i, wartosc):
+       # self._wartosc[i] = wartosc
 
     def zaplac(self, kwotaZakupu):
         """

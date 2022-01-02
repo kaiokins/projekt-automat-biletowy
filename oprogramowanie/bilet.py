@@ -1,4 +1,5 @@
 from tkinter import *
+
 from oprogramowanie import przedmiot
 
 
@@ -36,14 +37,13 @@ class Bilety(przedmiot.Przedmiot):
         self._ile += 1
 
     # def dodajbilet(self, i):
-        # self._ile += 1
+    # self._ile += 1
 
     def dodajBilet(self, rodzaj):
-        """
-        Metoda dodająca bilet.
-        Wykorzystywana jest podczas dodawania biletu za pomocą przycisku.
-        """
+        """Metoda dodająca bilet.Wykorzystywana jest podczas dodawania biletu za pomocą przycisku"""
+
         self._ile += 1
+
         # Poniższe dwie linie kodu używane są do poprawnego wyświetlania danych w polu typu "input"
         # Podczas dodawania ilości biletów zamiast zmiany wartości np. z 1 na 2 wystąpiłoby doklejenie do poprzedniej wartości czyli "12".
         rodzaj.delete(0, END)
@@ -55,6 +55,7 @@ class Bilety(przedmiot.Przedmiot):
         Dzięki niej użytkownik może wprowadzić dowolną ilość biletów do pola typu "input",
         a następnie wysłać informację do obiektu o ilości wprowadzonych biletów.
         """
+
         if ilosc < 0:
             pass
         else:
@@ -63,5 +64,5 @@ class Bilety(przedmiot.Przedmiot):
         typ.insert(0, self._ile)
 
     def jakiKoszt(self):
-        """Zwraca koszt danego biletu."""
+        """Zwraca koszt danego biletu"""
         return self._ile * self._cena

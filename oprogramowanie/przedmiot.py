@@ -12,19 +12,18 @@ class Przedmiot:
         self._cena = cena
         self._ile = ile
 
-
     def zwrocNazwe(self):
-        """Zwraca nazwę przedmiotu"""
+        """Wyświetla nazwę przedmiotu"""
         print("Nazwa przedmiotu to: ", self._nazwa)
 
     def zwrocRodzaj(self):
-        """"Zwraca rodzaj przedmiotu"""
+        """"Wyświetla rodzaj przedmiotu"""
         print("Rodzaj przedmiotu to: ", self._rodzaj)
 
     def zwrocIlosc(self):
-        """Zwraca ilość przedmiotu"""
+        """Wyświetla ilość przedmiotu"""
         print("Ilosc przedmiotu wynosi: ", self._ile)
 
     def zwrocCene(self):
-        """Zwraca cenę przedmiotu"""
+        """Wyświetla cenę przedmiotu"""
         print("Cena przedmiotu wynosi: ", self._cena)
