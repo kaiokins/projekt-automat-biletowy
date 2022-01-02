@@ -5,6 +5,7 @@ from tkinter import *
 from oprogramowanie.bilet import Bilety
 from wyjatki import wyjatki as w
 from datetime import datetime
+from functools import wraps
 
 # Utworzenie obiektu biletomat
 biletomat = biletomat.Biletomat()
@@ -184,7 +185,9 @@ def otworzPlatnosci():
     # które dane mają być przekazane oraz na jakich należy operować. W dwóch pierwszych parametrach podaję rodzaje nominału, a na końcu z pola input
     # odczytuję ilość tych monet. Funkcja wpłaconychDoDepo odpowiedzialna jest za wyświetlenie sumy wpłaconych pieniędzy. Zmienna wstawgr1b to zmienna
     # zawierająca gucik z napisem "+". Użytkownik, gdy chce wprowadzić dowolną ilość biletów to może wpisać je do pola input i potem dodać przyciskiem "+".
-    # Zawiera funkcję dodajmonetePole, do której przekazuje kolejno pole "input" czyli ile biletów mamy wpłacić.
+    # Zawiera funkcję dodajmonetePole, do której przekazuje kolejno pole "input" (ponieważ ciało ten funkcji jest odpowiedzialne za poprawne wyświetlanie wartości
+    # w polu input po dodaniu biletów) oraz funkcję sprawdź liczbę odpowiedzialną za walidację wprowadzanych danych. Dodatkowo przekazujemy etykietę blad_platnosci,
+    # aby wyświetił informację do niej po tym jak użytkownik poda nieprawidłową wartość.
     gr1b = Button(root2, text="1 grosz",
                   command=lambda: [biletomat.dodajDoDepozytu('1', 1, gr1i), wplaconychDoDepo()])
     wstawgr1b = Button(
@@ -309,19 +312,21 @@ def otworzPlatnosci():
 
 def ktoraGodzina(func):
     now = datetime.now()
+    @wraps(func)
     def wrapper(tekst):
         tekst['text'] = "Jest godzina " + now.strftime("%H:%M") + "\n" + func(tekst)
     return wrapper
 
 @ktoraGodzina
 def powitaj(tekst):
+    """Funkcja wyświetla prośbę o wybór biletu oraz aktualną godzinę (funkcja opakowna)"""
     return "Proszę wybrać rodzaj biletu"
 
+
+# Okienko odpowiedzialne za biletomat
 root = Tk()
 root.title("Automat biletowy MPK")
 root.geometry("600x650")
-
-# Okienka odpowiedzialne za automat biletowy
 label = Label(root, font=30)
 powitaj(label)
 label.pack()
@@ -334,9 +339,15 @@ label2.pack()
 
 
 def kosztZakupow():
+    """Funkcja pokazuje ile użytkownik musi zapłacić"""
     label2['text'] = "Do zapłacenia: " + str(zwrocCene()) + " zł"
 
-
+# Zmienne dla przycisków w biletomacie zostały utworzone w podobnej zasadzie. Przycisk ulg20b odpowiedzialny jest za dodanie biletu
+# ulgowego 20-minutowego. Przycisk ten wywołuje funkcje dodajbilet, który przekazuje ilość biletów pobranych z inputa do danego obiektu,
+# funkcję doZapłaty, która pokazuje sumę pieniędzy ...................... oraz kosztZakupow, która aktualizuje etykietę z sumą pieniędzy do zapłacenia.
+# Zmienna wstawulg20b to zmienna zawierająca gucik z napisem "+". Użytkownik, gdy chce wprowadzić dowolną ilość pieniędzy to może wpisać je do pola input i potem dodać przyciskiem "+".
+# Posiada ona funkcję dodajBiletPole, która przekazuje ilość biletów pobranych z inputa biletów do danego obiekt funkcję, która sprawdza czy została podana poprawna wartość,
+# funkcję doZaplatyPole, które przyjmuje wartość wyciągniętą z inputa.
 ulg20b = Button(
     root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajbilet(0, ulg20i), doZaplaty(0), kosztZakupow()])
 wstawulg20b = Button(
@@ -391,6 +402,7 @@ norm60b.pack()
 norm60i.pack()
 wstawnorm60b.pack()
 
+# Po kliknięciu przycisku podsumuj zostanie wyświetlone okno z płatnościami
 podsumowanie = Button(root, text="Podsumuj",
                       command=lambda: [otworzPlatnosci()])
 podsumowanie.pack()
