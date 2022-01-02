@@ -161,7 +161,7 @@ def otworzPlatnosci():
     # odczytuję ilość tych monet. Funkcja wpłaconychDoDepo odpowiedzialna jest za wyświetlenie sumy wpłaconych pieniędzy. Zmienna wstawgr1b to zmienna
     # zawierająca gucik z napisem "+". Użytkownik, gdy chce wprowadzić dowolną ilość biletów to może wpisać je do pola input i potem dodać przyciskiem "+".
     # Zawiera funkcję dodajmonetePole, do której przekazuje kolejno pole "input" (ponieważ ciało ten funkcji jest odpowiedzialne za poprawne wyświetlanie wartości
-    # w polu input po dodaniu biletów) oraz funkcję sprawdź liczbę odpowiedzialną za walidację wprowadzanych danych. Dodatkowo przekazujemy etykietę blad_platnosci,
+    # w polu input po dodaniu pieniędzy) oraz funkcję sprawdź liczbę odpowiedzialną za walidację wprowadzanych danych. Dodatkowo przekazujemy etykietę blad_platnosci,
     # aby wyświetił do niej informację po tym jak użytkownik poda nieprawidłową wartość.
 
     # ----------------------------1 grosz----------------------------
@@ -315,13 +315,15 @@ label2.pack()
 # ulgowego 20-minutowego. Przycisk ten wywołuje funkcje dodajbilet, który przekazuje ilość biletów pobranych z inputa do danego obiektu,
 # oraz kosztZakupow, która aktualizuje etykietę z sumą pieniędzy do zapłacenia.
 # Zmienna wstawulg20b to zmienna zawierająca guzik z napisem "+". Użytkownik, gdy chce wprowadzić dowolną ilość pieniędzy to może wpisać je do pola input i potem dodać przyciskiem "+".
-# Posiada ona funkcję dodajBiletPole, która przekazuje ilość biletów pobranych z inputa biletów do danego obiekt funkcję, która sprawdza czy została podana poprawna wartość,
-# funkcję doZaplatyPole, które przyjmuje wartość wyciągniętą z inputa.
+# Posiada ona funkcję dodajBiletPole, do której przekazywane są 2 parametry: pole "input" (ponieważ ciało ten funkcji jest odpowiedzialne za
+# poprawne wyświetlanie wartości w polu input po dodaniu biletów) oraz funkcję sprawdź liczbę odpowiedzialną za walidację wprowadzanych danych.
+# Dodatkowo przekazujemy etykietę blad_biletow, aby wyświetił do niej informację po tym jak użytkownik poda nieprawidłową wartość.
 
 # ----------------------------20-minutowy ulgowy----------------------------
 ulg20b = Button(root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajBilet(ulg20i), kosztZakupow(label2)])
 wstawulg20b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[0].dodajBiletPole(ulg20i, sprawdzLiczbe(ulg20i, blad_biletow)), kosztZakupow(label2)])
 ulg20i = Entry(root, width=5)
+
 ulg20b.pack()
 ulg20i.pack()
 wstawulg20b.pack()
@@ -330,6 +332,7 @@ wstawulg20b.pack()
 ulg40b = Button(root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajBilet(ulg40i), kosztZakupow(label2)])
 wstawulg40b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[1].dodajBiletPole(ulg40i, sprawdzLiczbe(ulg40i, blad_biletow)), kosztZakupow(label2)])
 ulg40i = Entry(root, width=5)
+
 ulg40b.pack()
 ulg40i.pack()
 wstawulg40b.pack()
@@ -338,6 +341,7 @@ wstawulg40b.pack()
 ulg60b = Button(root, text="60-minutowy ulgowy [3 zł]", command=lambda: [bilet[2].dodajBilet(ulg60i), kosztZakupow(label2)])
 wstawulg60b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[2].dodajBiletPole(ulg60i, sprawdzLiczbe(ulg60i, blad_biletow)), kosztZakupow(label2)])
 ulg60i = Entry(root, width=5)
+
 ulg60b.pack()
 ulg60i.pack()
 wstawulg60b.pack()
@@ -346,6 +350,7 @@ wstawulg60b.pack()
 norm20b = Button(root, text="20-minutowy normalny [2,25 zł]", command=lambda: [bilet[3].dodajBilet(norm20i), kosztZakupow(label2)])
 wstawnorm20b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[3].dodajBiletPole(norm20i, sprawdzLiczbe(norm20i, blad_biletow)), kosztZakupow(label2)])
 norm20i = Entry(root, width=5)
+
 norm20b.pack()
 norm20i.pack()
 wstawnorm20b.pack()
@@ -354,6 +359,7 @@ wstawnorm20b.pack()
 norm40b = Button(root, text="40-minutowy normalny [4,40 zł]", command=lambda: [bilet[4].dodajBilet(norm40i), kosztZakupow(label2)])
 wstawnorm40b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[4].dodajBiletPole(norm40i, sprawdzLiczbe(norm40i, blad_biletow)), kosztZakupow(label2)])
 norm40i = Entry(root, width=5)
+
 norm40b.pack()
 norm40i.pack()
 wstawnorm40b.pack()
@@ -362,6 +368,7 @@ wstawnorm40b.pack()
 norm60b = Button( root, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajBilet(norm60i), kosztZakupow(label2)])
 wstawnorm60b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[5].dodajBiletPole(norm60i, sprawdzLiczbe(norm60i, blad_biletow)), kosztZakupow(label2)])
 norm60i = Entry(root, width=5)
+
 norm60b.pack()
 norm60i.pack()
 wstawnorm60b.pack()

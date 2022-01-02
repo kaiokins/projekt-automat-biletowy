@@ -21,7 +21,6 @@ class Biletomat(p.PrzechowywaczMonet):
         """
 
         self._depozyt[rodzaj] = self._depozyt[rodzaj] + ile
-        print("DEPO", self._depozyt[rodzaj])
 
         # Poniższe dwie linie kodu używane są do poprawnego wyświetlania danych w polu typu "input".
         # Podczas dodawania ilości nominałów zamiast zmiany wartości np. z 1 na 2 wystąpiłoby doklejenie do poprzedniej wartości czyli "12".
@@ -67,19 +66,20 @@ class Biletomat(p.PrzechowywaczMonet):
             # Jeżeli funkcja reszta, zwróci wartość -1 to transakcja się powiedzie,
             # w przeciwnym wypadku zostaniemy poproszeni o wprowadzenie wyliczonej kwoty
             if self.reszta(doWydania) != -1:
+                # Dziękujemy za zakup
                 self._informacja = 1
-                print("Dziekujemy za zakup")
 
                 # Pieniądze zostają wrzucone z depozytu do przechowywacza monet
                 # oraz zostaje wywołana funkcja zapiszPlik zapisująca stan przechowywacza w pliku.
                 self._pieniadze = {i: self._pieniadze[i] + self._depozyt[i] for i in self._pieniadze.keys()}
                 self.zapiszPlik()
             else:
+                # Tylko odliczona kwota, zwracam pieniądze
                 self._informacja = 2
-                print("Tylko odliczona kwota, zwracam pieniądze")
         else:
+            # Wrzuciłeś za mało banknotów
             self._informacja = 3
-            print("Wrzuciłeś za mało banknotów")
+
 
     def pobierzInformacje(self):
         """
