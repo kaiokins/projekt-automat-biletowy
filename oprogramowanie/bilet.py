@@ -40,12 +40,12 @@ class Bilety(przedmiot.Przedmiot):
     # self._ile += 1
 
     def dodajBilet(self, rodzaj):
-        """Metoda dodająca bilet.Wykorzystywana jest podczas dodawania biletu za pomocą przycisku"""
+        """Metoda dodająca bilet. Wykorzystywana jest podczas dodawania biletu za pomocą przycisku"""
 
         self._ile += 1
 
-        # Poniższe dwie linie kodu używane są do poprawnego wyświetlania danych w polu typu "input"
-        # Podczas dodawania ilości biletów zamiast zmiany wartości np. z 1 na 2 wystąpiłoby doklejenie do poprzedniej wartości czyli "12".
+        # Poniższe dwie linie kodu używane są do poprawnego wyświetlania danych w polu typu "input".
+        # Bez tego podczas dodawania ilości biletów zamiast zmiany wartości np. z 1 na 2 wystąpiłoby doklejenie do poprzedniej wartości czyli "12".
         rodzaj.delete(0, END)
         rodzaj.insert(0, self._ile)
 
