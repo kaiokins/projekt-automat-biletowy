@@ -34,8 +34,6 @@ class PrzechowywaczMonet:
 
         self._pieniadze = {}  # Pojemnik (w postaci słownika) służący do przechowywania monet/banknotów (rodzaj:ilość)
         # self._pieniadze = {'1': 55, '2': 55, '5': 55, '10': 55, '20': 55, '50': 55, '100': 55, '200': 55, '500': 55, '1000': 55, '2000': 55, '5000': 55}
-        # self._sumaPojemnika = 0
-        # self._doUsunieciaZPrzechowywacza = 0
         self.wczytajPlik()  # Wywołanie funkcji wczytującej monety/banknoty
         self._reszta = {} # Przechowuje resztę dla użytkownika
 
@@ -46,8 +44,6 @@ class PrzechowywaczMonet:
         for key, value in self._pieniadze.items():
             suma += int(key) * value
         return suma / 100
-        # a = PrzechowywaczMonet()
-        # print(a.suma())
 
     def reszta(self, doWydania):
         """Metoda odpowiedzialna za obliczanie reszty"""
@@ -64,7 +60,6 @@ class PrzechowywaczMonet:
 
         doWydania = doWydania * 100
         reszta = [0] * 12
-        print('ILE DO WYDANIA', doWydania)
 
         # Pętla, która iteruje po ilości rodzajów monet/banknotów. Dopóki w przechowywaczu mamy dostępne nominały
         # lub możemy wydać to wydajemy w ten sposób resztę użytkownikowi. Dla przykładu użytkownik kupi 2 bilety
@@ -74,8 +69,6 @@ class PrzechowywaczMonet:
                 doWydania -= int(moneta[i])
                 ilosc[i] -= 1
                 reszta[i] += 1
-                print("TYLE ODJĄŁ", moneta[i])
-            print("TU", doWydania)
 
         moneta.reverse()
         ilosc.reverse()
@@ -84,10 +77,8 @@ class PrzechowywaczMonet:
         # Łączymy rodzaj oraz ilość nominałów za pomocą funkcji zip do słownika
         zostalo = dict(zip(moneta, ilosc))
         reszta = dict(zip(moneta, reszta))
-        print("zostalo", zostalo)
-        print("reszta", reszta)
 
-        # Jeśli pieniadze uda się wydać to zwracamy je razem z tym co zostało w przeciwnym wypadku wracamy -1
+        # Jeśli pieniadze uda się wydać to przypisujemy je do zmiennych (słowników), a w przeciwnym wypadku zwracamy -1
         if doWydania == 0:
             self._pieniadze = zostalo
             self._reszta = reszta

@@ -16,7 +16,7 @@ class Biletomat(p.PrzechowywaczMonet):
 
     def dodajDoDepozytu(self, rodzaj, ile, typ):
         """
-        Dodaje monete do depozytu wrzucocą przez użytkownika.
+        Dodaje monete do depozytu wrzuconą przez użytkownika.
         Metoda używana jest w intefejsie przy przyciśnięciu guzika o danym nominale.
         """
 
@@ -28,8 +28,6 @@ class Biletomat(p.PrzechowywaczMonet):
         typ.delete(0, END)
         typ.insert(0, self._depozyt[rodzaj])
 
-    # def dodajDoPrzechowywacza(self, i):
-    # self._pieniadze[i] += self._depozyt[i]
 
     def dodajMonetePole(self, typ, rodzaj, ilosc):
         """
@@ -52,11 +50,6 @@ class Biletomat(p.PrzechowywaczMonet):
             suma += int(key) * Decimal(value)
         return suma / 100
 
-    # def wyciagWartosc(self, i):
-    # return self._depozyt[i]
-
-    # def wprowadzWartosc(self, i, wartosc):
-    # self._wartosc[i] = wartosc
 
     def zaplac(self, kwotaZakupu):
         """
@@ -76,14 +69,11 @@ class Biletomat(p.PrzechowywaczMonet):
             if self.reszta(doWydania) != -1:
                 self._informacja = 1
                 print("Dziekujemy za zakup")
-                # for i in self._pieniadze.keys():
-                # self._pieniadze[i] = self._pieniadze[i] + self._depozyt[i]
 
                 # Pieniądze zostają wrzucone z depozytu do przechowywacza monet
                 # oraz zostaje wywołana funkcja zapiszPlik zapisująca stan przechowywacza w pliku.
                 self._pieniadze = {i: self._pieniadze[i] + self._depozyt[i] for i in self._pieniadze.keys()}
                 self.zapiszPlik()
-                print("OSTATECZNIE: ", self._pieniadze)
             else:
                 self._informacja = 2
                 print("Tylko odliczona kwota, zwracam pieniądze")
@@ -105,5 +95,3 @@ class Biletomat(p.PrzechowywaczMonet):
     def wyczyscDepozyt(self):
         """Czyści depozyt z monet"""
         self._depozyt = {key: 0 for key in self._depozyt}
-        # for key in self._depozyt.keys():
-        # self._depozyt[key] = 0

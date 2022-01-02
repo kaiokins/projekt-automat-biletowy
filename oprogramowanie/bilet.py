@@ -14,7 +14,6 @@ class Bilety(przedmiot.Przedmiot):
         :param ile: ile sztuk danego biletu
         """
         przedmiot.Przedmiot.__init__(self, nazwa, rodzaj, cena, ile)
-        # self._podsumowanie = 0
 
     def zwrocNazwe(self):
         """Zwraca nazwę danego biletu"""
@@ -25,22 +24,15 @@ class Bilety(przedmiot.Przedmiot):
         return self._rodzaj
 
     def zwrocIlosc(self):
-        """Zwraca ilość biletu"""
+        """Zwraca ilość sztuk danego biletu"""
         return self._ile
 
     def zwrocCene(self):
         """Zwraca cenę biletu"""
         return self._cena
 
-    def dodajIlosc(self):
-        """Dodaje bilet"""
-        self._ile += 1
-
-    # def dodajbilet(self, i):
-    # self._ile += 1
-
     def dodajBilet(self, rodzaj):
-        """Metoda dodająca bilet. Wykorzystywana jest podczas dodawania biletu za pomocą przycisku"""
+        """Metoda dodająca bilet. Wykorzystywana jest podczas dodawania biletu za pomocą przycisku."""
 
         self._ile += 1
 
@@ -62,7 +54,3 @@ class Bilety(przedmiot.Przedmiot):
             self._ile = ilosc
         typ.delete(0, END)
         typ.insert(0, self._ile)
-
-    def jakiKoszt(self):
-        """Zwraca koszt danego biletu"""
-        return self._ile * self._cena
