@@ -70,6 +70,7 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
                     bilet[i].zwrocRodzaj() + " w ilości sztuk: " + \
                     str(bilet[i].zwrocIlosc()) + "\n"
 
+        biletomat.zwrocReszte()
         jakieBiletyZakupil['text'] = info + "\n Wydano " + \
             str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
         jakieBiletyZakupil.pack()
@@ -102,7 +103,7 @@ def doZaplaty(i):
     if bilet[i].zwrocIlosc() == 0:
         pass
     elif bilet[i].zwrocIlosc() < 0:
-        bilet[i].dodajbilet(i)
+        bilet[i].dodajBilet(i)
     # else:
         # print(round(bilet[i].zwrocIlosc()*bilet[i].zwrocCene(), 5))
 
@@ -111,7 +112,7 @@ def doZaplatyPole(i, ilosc):
     if bilet[i].zwrocIlosc() == 0:
         pass
     elif bilet[i].zwrocIlosc() < 0:
-        bilet[i].dodajbilet(i)
+        bilet[i].dodajBilet(i)
     # else:
         # print(round(int(ulg20i.get())*bilet[i].zwrocCene(), 5))
 
@@ -349,54 +350,54 @@ def kosztZakupow():
 # Posiada ona funkcję dodajBiletPole, która przekazuje ilość biletów pobranych z inputa biletów do danego obiekt funkcję, która sprawdza czy została podana poprawna wartość,
 # funkcję doZaplatyPole, które przyjmuje wartość wyciągniętą z inputa.
 ulg20b = Button(
-    root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajbilet(0, ulg20i), doZaplaty(0), kosztZakupow()])
+    root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajBilet(ulg20i), doZaplaty(0), kosztZakupow()])
 wstawulg20b = Button(
-    root, text=tekstGuzikaDodaj, command=lambda: [bilet[0].dodajBiletPole(0, ulg20i, sprawdzLiczbe(ulg20i, blad_biletow)), doZaplatyPole(0, int(ulg20i.get())), kosztZakupow()])
+    root, text=tekstGuzikaDodaj, command=lambda: [bilet[0].dodajBiletPole(ulg20i, sprawdzLiczbe(ulg20i, blad_biletow)), doZaplatyPole(0, int(ulg20i.get())), kosztZakupow()])
 ulg20i = Entry(root, width=5)
 ulg20b.pack()
 ulg20i.pack()
 wstawulg20b.pack()
 
 ulg40b = Button(
-    root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajbilet(1, ulg40i), doZaplaty(1), kosztZakupow()])
+    root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajBilet(ulg40i), doZaplaty(1), kosztZakupow()])
 wstawulg40b = Button(
-    root, text=tekstGuzikaDodaj, command=lambda: [bilet[1].dodajBiletPole(1, ulg40i, sprawdzLiczbe(ulg40i, blad_biletow)), doZaplatyPole(1, int(ulg40i.get())), kosztZakupow()])
+    root, text=tekstGuzikaDodaj, command=lambda: [bilet[1].dodajBiletPole(ulg40i, sprawdzLiczbe(ulg40i, blad_biletow)), doZaplatyPole(1, int(ulg40i.get())), kosztZakupow()])
 ulg40i = Entry(root, width=5)
 ulg40b.pack()
 ulg40i.pack()
 wstawulg40b.pack()
 
 ulg60b = Button(
-    root, text="60-minutowy ulgowy [3 zł]", command=lambda: [bilet[2].dodajbilet(2, ulg60i), doZaplaty(2), kosztZakupow()])
+    root, text="60-minutowy ulgowy [3 zł]", command=lambda: [bilet[2].dodajBilet(ulg60i), doZaplaty(2), kosztZakupow()])
 wstawulg60b = Button(
-    root, text=tekstGuzikaDodaj, command=lambda: [bilet[2].dodajBiletPole(2, ulg60i, sprawdzLiczbe(ulg60i, blad_biletow)), doZaplatyPole(2, int(ulg60i.get())), kosztZakupow()])
+    root, text=tekstGuzikaDodaj, command=lambda: [bilet[2].dodajBiletPole(ulg60i, sprawdzLiczbe(ulg60i, blad_biletow)), doZaplatyPole(2, int(ulg60i.get())), kosztZakupow()])
 ulg60i = Entry(root, width=5)
 ulg60b.pack()
 ulg60i.pack()
 wstawulg60b.pack()
 
 norm20b = Button(
-    root, text="20-minutowy normalny [2,25 zł]", command=lambda: [bilet[3].dodajbilet(3, norm20i), doZaplaty(3), kosztZakupow()])
+    root, text="20-minutowy normalny [2,25 zł]", command=lambda: [bilet[3].dodajBilet(norm20i), doZaplaty(3), kosztZakupow()])
 wstawnorm20b = Button(
-    root, text=tekstGuzikaDodaj, command=lambda: [bilet[3].dodajBiletPole(3, norm20i, sprawdzLiczbe(norm20i, blad_biletow)), doZaplatyPole(3, int(norm20i.get())), kosztZakupow()])
+    root, text=tekstGuzikaDodaj, command=lambda: [bilet[3].dodajBiletPole(norm20i, sprawdzLiczbe(norm20i, blad_biletow)), doZaplatyPole(3, int(norm20i.get())), kosztZakupow()])
 norm20i = Entry(root, width=5)
 norm20b.pack()
 norm20i.pack()
 wstawnorm20b.pack()
 
 norm40b = Button(
-    root, text="40-minutowy normalny [4,40 zł]", command=lambda: [bilet[4].dodajbilet(4, norm40i), doZaplaty(4), kosztZakupow()])
+    root, text="40-minutowy normalny [4,40 zł]", command=lambda: [bilet[4].dodajBilet(norm40i), doZaplaty(4), kosztZakupow()])
 wstawnorm40b = Button(
-    root, text=tekstGuzikaDodaj, command=lambda: [bilet[4].dodajBiletPole(4, norm40i, sprawdzLiczbe(norm40i, blad_biletow)), doZaplatyPole(4, int(norm40i.get())), kosztZakupow()])
+    root, text=tekstGuzikaDodaj, command=lambda: [bilet[4].dodajBiletPole(norm40i, sprawdzLiczbe(norm40i, blad_biletow)), doZaplatyPole(4, int(norm40i.get())), kosztZakupow()])
 norm40i = Entry(root, width=5)
 norm40b.pack()
 norm40i.pack()
 wstawnorm40b.pack()
 
 norm60b = Button(
-    root, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajbilet(5, norm60i), doZaplaty(5), kosztZakupow()])
+    root, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajBilet(norm60i), doZaplaty(5), kosztZakupow()])
 wstawnorm60b = Button(
-    root, text=tekstGuzikaDodaj, command=lambda: [bilet[5].dodajBiletPole(4, norm60i, sprawdzLiczbe(norm60i, blad_biletow)), doZaplatyPole(5, int(norm60i.get())), kosztZakupow()])
+    root, text=tekstGuzikaDodaj, command=lambda: [bilet[5].dodajBiletPole(norm60i, sprawdzLiczbe(norm60i, blad_biletow)), doZaplatyPole(5, int(norm60i.get())), kosztZakupow()])
 norm60i = Entry(root, width=5)
 norm60b.pack()
 norm60i.pack()

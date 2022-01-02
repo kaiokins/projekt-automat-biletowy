@@ -5,7 +5,7 @@ from oprogramowanie import przedmiot
 class Bilety(przedmiot.Przedmiot):
     def __init__(self, nazwa, rodzaj, cena, ile):
         """
-        Klasa Bilety jest odpowiedzialna za dodawanie nowych biletów (tworzenie kolejnych obiektów).
+        Klasa Bilety jest odpowiedzialna za dodawanie nowych biletów (tworzenie obiektów).
         Dziedziczy ona pola oraz metody po klasie przedmiot.
         :param nazwa: nazwa biletu
         :param rodzaj: rodaj biletu
@@ -13,7 +13,7 @@ class Bilety(przedmiot.Przedmiot):
         :param ile: ile sztuk danego biletu
         """
         przedmiot.Przedmiot.__init__(self, nazwa, rodzaj, cena, ile)
-        self._podsumowanie = 0
+        # self._podsumowanie = 0
 
     def zwrocNazwe(self):
         """Zwraca nazwę danego biletu"""
@@ -35,10 +35,10 @@ class Bilety(przedmiot.Przedmiot):
         """Dodaje bilet"""
         self._ile += 1
 
-    def dodajbilet(self, i):
-        self._ile += 1
+    # def dodajbilet(self, i):
+        # self._ile += 1
 
-    def dodajbilet(self, i, rodzaj):
+    def dodajBilet(self, rodzaj):
         """
         Metoda dodająca bilet.
         Wykorzystywana jest podczas dodawania biletu za pomocą przycisku.
@@ -49,7 +49,7 @@ class Bilety(przedmiot.Przedmiot):
         rodzaj.delete(0, END)
         rodzaj.insert(0, self._ile)
 
-    def dodajBiletPole(self, i, typ, ilosc):
+    def dodajBiletPole(self, typ, ilosc):
         """
         Metoda dodająca bilet. Wywoływana jest przy naciśnięciu przycisku "+" na interfejsie.
         Dzięki niej użytkownik może wprowadzić dowolną ilość biletów do pola typu "input",

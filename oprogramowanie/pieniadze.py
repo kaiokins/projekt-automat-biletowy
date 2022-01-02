@@ -32,9 +32,10 @@ class PrzechowywaczMonet:
         """
         self._pieniadze = {} # Pojemnik (w postaci słownika) służący do przechowywania monet/banknotów (rodzaj:ilość)
         # self._pieniadze = {'1': 55, '2': 55, '5': 55, '10': 55, '20': 55, '50': 55, '100': 55, '200': 55, '500': 55, '1000': 55, '2000': 55, '5000': 55}
-        self._sumaPojemnika = 0
-        self._doUsunieciaZPrzechowywacza = 0
+        # self._sumaPojemnika = 0
+        # self._doUsunieciaZPrzechowywacza = 0
         self.wczytajPlik() # Wywołanie funkcji wczytującej monety/banknoty
+        self._reszta = {}
 
     def suma(self):
         """Zwraca sumę monet w złotówkach"""
@@ -89,6 +90,10 @@ class PrzechowywaczMonet:
         # w przeciwnym wypadku wracamy -1
         if doWydania == 0:
             self._pieniadze = zostalo
-            return (zostalo, reszta)
+            self._reszta = reszta
         else:
             return -1
+
+    def zwrocReszte(self):
+        """Zwrócenie reszty do użytkownika"""
+        return self._reszta

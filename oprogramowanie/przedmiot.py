@@ -1,9 +1,7 @@
-
-
 class Przedmiot:
     def __init__(self, nazwa, rodzaj, cena, ile):
         """
-        Klasa przedmiot jest to ogólna klasa, po której inne klasy mogą dziedziczyć pola oraz metody. W tym programie po tej klasie dziedziczyła będzie klasa bilet.
+        Klasa przedmiot jest to ogólna klasa, po której inne klasy mogą dziedziczyć pola oraz metody. W tym programie po tej klasie dziedziczyła będzie klasa bilet
         :param nazwa: nazwa przedmiotu
         :param rodzaj: rodzaj przedmiotu
         :param cena: cena przedmiotu
@@ -13,7 +11,6 @@ class Przedmiot:
         self._rodzaj = rodzaj
         self._cena = cena
         self._ile = ile
-        self._kolor = ''
 
 
     def zwrocNazwe(self):

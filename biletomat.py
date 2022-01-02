@@ -77,8 +77,7 @@ class Biletomat(p.PrzechowywaczMonet):
 
                 # Pieniądze zostają wrzucone z depozytu do przechowywacza monet
                 # oraz zostaje wywołana funkcja zapiszPlik zapisująca stan przechowywacza w pliku.
-                self._pieniadze = {
-                    i: self._pieniadze[i] + self._depozyt[i] for i in self._pieniadze.keys()}
+                self._pieniadze = {i: self._pieniadze[i] + self._depozyt[i] for i in self._pieniadze.keys()}
                 self.zapiszPlik()
                 print("OSTATECZNIE: ", self._pieniadze)
             else:
