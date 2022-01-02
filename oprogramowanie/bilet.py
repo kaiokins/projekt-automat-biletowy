@@ -32,19 +32,29 @@ class Bilety(przedmiot.Przedmiot):
         return self._cena
 
     def dodajIlosc(self):
-        """Zwraca ilość sztuk biletu"""
+        """Dodaje bilet"""
         self._ile += 1
 
     def dodajbilet(self, i):
-        """"""
         self._ile += 1
 
     def dodajbilet(self, i, rodzaj):
+        """
+        Metoda dodająca bilet.
+        Wykorzystywana jest podczas dodawania biletu za pomocą przycisku.
+        """
         self._ile += 1
+        # Poniższe dwie linie kodu używane są do poprawnego wyświetlania danych w polu typu "input"
+        # Podczas dodawania ilości biletów zamiast zmiany wartości np. z 1 na 2 wystąpiłoby doklejenie do poprzedniej wartości czyli "12".
         rodzaj.delete(0, END)
         rodzaj.insert(0, self._ile)
 
     def dodajBiletPole(self, i, typ, ilosc):
+        """
+        Metoda dodająca bilet. Wywoływana jest przy naciśnięciu przycisku "+" na interfejsie.
+        Dzięki niej użytkownik może wprowadzić dowolną ilość biletów do pola typu "input",
+        a następnie wysłać informację do obiektu o ilości wprowadzonych biletów.
+        """
         if ilosc < 0:
             pass
         else:
@@ -53,5 +63,5 @@ class Bilety(przedmiot.Przedmiot):
         typ.insert(0, self._ile)
 
     def jakiKoszt(self):
-        """Zwraca koszt danego biletu. """
+        """Zwraca koszt danego biletu."""
         return self._ile * self._cena
