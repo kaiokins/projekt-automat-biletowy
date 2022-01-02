@@ -1,12 +1,14 @@
 import csv
-
+import os
+from pathlib import Path
 
 class PrzechowywaczMonet:
     def wczytajPlik(self):
         """Metoda odpowiedzialna za wczytywanie z pliku .csv rodzajów oraz ilości monet/banknotów"""
 
         try:
-            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/oprogramowanie/pieniadze.csv', mode='r') as f:
+            file = Path(__file__).with_name("pieniadze.csv")
+            with open(file) as f:
                 reader = csv.reader(f)
                 for row in reader:
                     k, v = row
@@ -20,7 +22,8 @@ class PrzechowywaczMonet:
         """Metoda odpowiedzialna za zapisywanie do pliku ilości monet/banknotów po poprawnym wykonaniu wszystkich operacji transakcyjnych"""
 
         try:
-            with open('C:/Users/Kuba/Documents/GitHub/projekt-automat-biletowy/oprogramowanie/pieniadze.csv', mode='w') as f:
+            file = Path(__file__).with_name("pieniadze.csv")
+            with open(file, "w") as f:
                 [f.write('{0},{1}\n'.format(key, value)) for key, value in self._pieniadze.items()]
         except:
             print("Wystąpił błąd przy zapisywaniu pliku")
