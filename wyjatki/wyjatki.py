@@ -1,4 +1,9 @@
-class bladUjemnaWartosc(Exception):
+class Blad(Exception):
+    """Bazowa klasa wyjątków"""
+    pass
+
+
+class bladUjemnaWartosc(Blad):
     def __init__(self, wiadomosc):
         """
         Klasa wyjątku, która użyta jest przy sprawdzaniu poprawności wprowadzenia liczby biletów/ilości monet lub banknotów.

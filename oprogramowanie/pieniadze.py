@@ -91,3 +91,17 @@ class PrzechowywaczMonet:
     def zwrocReszte(self):
         """Zwrócenie reszty do użytkownika"""
         return self._reszta
+
+    def czyZostalaReszta(self):
+        """
+        Funkcja odpowiedzialna za sprawdzanie, czy zostala reszta
+        """
+        # Funkcja wykorzystywana jest w interfejsie do sprawdzanie czy ma wydać resztę, czy też nie
+        x = 0
+        for i in self._reszta.values():
+            if i > 0:
+                x += 1
+        if x == 0:
+            return 0
+        else:
+            return 1

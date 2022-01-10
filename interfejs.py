@@ -4,7 +4,7 @@ from decimal import *
 from functools import wraps
 from tkinter import *
 
-import biletomat
+from oprogramowanie import biletomat
 from oprogramowanie.bilet import Bilety
 from wyjatki import wyjatki as w
 
@@ -22,7 +22,7 @@ def ktoraGodzina(func):
     now = datetime.now()
     @wraps(func)
     def wrapper(tekst):
-        tekst['text'] = "Jest godzina " + now.strftime("%H:%M") + "\n" + func(tekst)
+        tekst['text'] = "Aktualna godzina to " + now.strftime("%H:%M") + "\n" + func(tekst)
     return wrapper
 
 @ktoraGodzina
@@ -75,10 +75,13 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
             if bilet[i].zwrocIlosc() > 0:
                 info += "Bilet " + bilet[i].zwrocNazwe() + " " + bilet[i].zwrocRodzaj() + " w ilości sztuk: " + str(bilet[i].zwrocIlosc()) + "\n"
 
-        biletomat.zwrocReszte()
-
-        jakieBiletyZakupil['text'] = info + "\n Wydano " + str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
-        jakieBiletyZakupil.pack()
+        if biletomat.czyZostalaReszta() == 1:
+            biletomat.zwrocReszte()
+            jakieBiletyZakupil['text'] = info + "\n Wydano " + str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
+            jakieBiletyZakupil.pack()
+        else:
+            jakieBiletyZakupil['text'] = info
+            jakieBiletyZakupil.pack()
 
         zamknijOkno()
     elif biletomat.pobierzInformacje() == 2:
@@ -124,7 +127,7 @@ def sprawdzLiczbe(zmienna, blad):
         blad['text'] = "Podałeś ujemną wartość"
         return 0
     except:
-        blad['text'] = "Podałeś nieprawidłową wartość"
+        blad['text'] = "Podałeś błędną wartość"
         return 0
 
 
@@ -142,16 +145,16 @@ def otworzPlatnosci():
     root2 = Tk()
 
     root2.title("Zaplac za bilet")
-    root2.geometry("600x1000")
+    root2.geometry("500x650")
 
     label = Label(root2, text="Proszę wybrać monety/banknoty do zapłacenia", font=30)
-    label.pack()
+    label.grid(row=1, column=0)
 
     blad_platnosci = Label(root2, text="", font=30)
-    blad_platnosci.pack()
+    blad_platnosci.grid(row=2, column=0)
 
     wplacono = Label(root2, text="Wpłaciłeś " + str(biletomat.sumaDepo()) + " zł", font=30)
-    wplacono.pack()
+    wplacono.grid(row=3, column=0)
 
     # Poniżej utworzone są przyciski/pola "input", które wywołują odpowiednie funkcje po naciśnięciu ich. Pozostałe są tworzone na podobne zasadzie.
     # Zmienne tworzyłem by bylo potem lepiej identyfikować dany przycisk dla przykładu gr1b oznacza gr - grosz, 1 - 1 zł, b - button.
@@ -165,115 +168,115 @@ def otworzPlatnosci():
     # aby wyświetił do niej informację po tym jak użytkownik poda nieprawidłową wartość.
 
     # ----------------------------1 grosz----------------------------
-    gr1b = Button(root2, text="1 grosz", command=lambda: [biletomat.dodajDoDepozytu('1', 1, gr1i), wplaconychDoDepo()])
+    gr1b = Button(root2, width=25, height=2, text="1 grosz", command=lambda: [biletomat.dodajDoDepozytu('1', 1, gr1i), wplaconychDoDepo()])
     wstawgr1b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(gr1i, '1', sprawdzLiczbe(gr1i, blad_platnosci)), wplaconychDoDepo()])
     gr1i = Entry(root2, width=5)
 
-    gr1b.pack()
-    gr1i.pack()
-    wstawgr1b.pack()
+    gr1b.grid(row=4, column=0)
+    gr1i.grid(row=4, column=1)
+    wstawgr1b.grid(row=4, column=2)
 
     # ----------------------------2 grosze----------------------------
-    gr2b = Button(root2, text="2 grosze", command=lambda: [biletomat.dodajDoDepozytu('2', 1, gr2i), wplaconychDoDepo()])
+    gr2b = Button(root2, width=25, height=2, text="2 grosze", command=lambda: [biletomat.dodajDoDepozytu('2', 1, gr2i), wplaconychDoDepo()])
     wstawgr2b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(gr2i, '2', sprawdzLiczbe(gr2i, blad_platnosci)), wplaconychDoDepo()])
     gr2i = Entry(root2, width=5)
 
-    gr2b.pack()
-    gr2i.pack()
-    wstawgr2b.pack()
+    gr2b.grid(row=6, column=0)
+    gr2i.grid(row=6, column=1)
+    wstawgr2b.grid(row=6, column=2)
 
     # ----------------------------5 groszy----------------------------
-    gr5b = Button(root2, text="5 groszy",command=lambda: [biletomat.dodajDoDepozytu('5', 1, gr5i), wplaconychDoDepo()])
+    gr5b = Button(root2, width=25, height=2, text="5 groszy",command=lambda: [biletomat.dodajDoDepozytu('5', 1, gr5i), wplaconychDoDepo()])
     wstawgr5b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(gr5i, '5', sprawdzLiczbe(gr5i, blad_platnosci)), wplaconychDoDepo()])
     gr5i = Entry(root2, width=5)
 
-    gr5b.pack()
-    gr5i.pack()
-    wstawgr5b.pack()
+    gr5b.grid(row=8, column=0)
+    gr5i.grid(row=8, column=1)
+    wstawgr5b.grid(row=8, column=2)
 
     # ----------------------------10 groszy----------------------------
-    gr10b = Button(root2, text="10 groszy",command=lambda: [biletomat.dodajDoDepozytu('10', 1, gr10i), wplaconychDoDepo()])
+    gr10b = Button(root2, width=25, height=2, text="10 groszy",command=lambda: [biletomat.dodajDoDepozytu('10', 1, gr10i), wplaconychDoDepo()])
     wstawgr10b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(gr10i, '10', sprawdzLiczbe(gr10i, blad_platnosci)), wplaconychDoDepo()])
     gr10i = Entry(root2, width=5)
 
-    gr10b.pack()
-    gr10i.pack()
-    wstawgr10b.pack()
+    gr10b.grid(row=10, column=0)
+    gr10i.grid(row=10, column=1)
+    wstawgr10b.grid(row=10, column=2)
 
     # ----------------------------20 groszy----------------------------
-    gr20b = Button(root2, text="20 groszy", command=lambda: [biletomat.dodajDoDepozytu('20', 1, gr20i), wplaconychDoDepo()])
+    gr20b = Button(root2, width=25, height=2, text="20 groszy", command=lambda: [biletomat.dodajDoDepozytu('20', 1, gr20i), wplaconychDoDepo()])
     wstawgr20b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(gr20i, '20', sprawdzLiczbe(gr20i, blad_platnosci)), wplaconychDoDepo()])
     gr20i = Entry(root2, width=5)
 
-    gr20b.pack()
-    gr20i.pack()
-    wstawgr20b.pack()
+    gr20b.grid(row=12, column=0)
+    gr20i.grid(row=12, column=1)
+    wstawgr20b.grid(row=12, column=2)
 
     # ----------------------------50 groszy----------------------------
-    gr50b = Button(root2, text="50 groszy", command=lambda: [biletomat.dodajDoDepozytu('50', 1, gr50i), wplaconychDoDepo()])
+    gr50b = Button(root2, width=25, height=2, text="50 groszy", command=lambda: [biletomat.dodajDoDepozytu('50', 1, gr50i), wplaconychDoDepo()])
     wstawgr50b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(gr50i, '50', sprawdzLiczbe(gr50i, blad_platnosci)), wplaconychDoDepo()])
     gr50i = Entry(root2, width=5)
 
-    gr50b.pack()
-    gr50i.pack()
-    wstawgr50b.pack()
+    gr50b.grid(row=14, column=0)
+    gr50i.grid(row=14, column=1)
+    wstawgr50b.grid(row=14, column=2)
 
     # ----------------------------1 złoty----------------------------
-    zl1b = Button(root2, text="1 złoty", command=lambda: [biletomat.dodajDoDepozytu('100', 1, zl1i), wplaconychDoDepo()])
+    zl1b = Button(root2, width=25, height=2, text="1 złoty", command=lambda: [biletomat.dodajDoDepozytu('100', 1, zl1i), wplaconychDoDepo()])
     wstawzl1b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(zl1i, '100', sprawdzLiczbe(zl1i, blad_platnosci)), wplaconychDoDepo()])
     zl1i = Entry(root2, width=5)
 
-    zl1b.pack()
-    zl1i.pack()
-    wstawzl1b.pack()
+    zl1b.grid(row=16, column=0)
+    zl1i.grid(row=16, column=1)
+    wstawzl1b.grid(row=16, column=2)
 
     # ----------------------------2 złote----------------------------
-    zl2b = Button(root2, text="2 złote", command=lambda: [biletomat.dodajDoDepozytu('200', 1, zl2i), wplaconychDoDepo()])
+    zl2b = Button(root2, width=25, height=2, text="2 złote", command=lambda: [biletomat.dodajDoDepozytu('200', 1, zl2i), wplaconychDoDepo()])
     wstawzl2b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(zl2i, '200', sprawdzLiczbe(zl2i, blad_platnosci)), wplaconychDoDepo()])
     zl2i = Entry(root2, width=5)
 
-    zl2b.pack()
-    zl2i.pack()
-    wstawzl2b.pack()
+    zl2b.grid(row=18, column=0)
+    zl2i.grid(row=18, column=1)
+    wstawzl2b.grid(row=18, column=2)
 
     # ----------------------------5 złotych----------------------------
-    zl5b = Button(root2, text="5 złotych", command=lambda: [biletomat.dodajDoDepozytu('500', 1, zl5i), wplaconychDoDepo()])
+    zl5b = Button(root2, width=25, height=2, text="5 złotych", command=lambda: [biletomat.dodajDoDepozytu('500', 1, zl5i), wplaconychDoDepo()])
     wstawzl5b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(zl5i, '500', sprawdzLiczbe(zl5i, blad_platnosci)), wplaconychDoDepo()])
     zl5i = Entry(root2, width=5)
 
-    zl5b.pack()
-    zl5i.pack()
-    wstawzl5b.pack()
+    zl5b.grid(row=20, column=0)
+    zl5i.grid(row=20, column=1)
+    wstawzl5b.grid(row=20, column=2)
 
     # ----------------------------10 złotych----------------------------
-    zl10b = Button(root2, text="10 złotych", command=lambda: [biletomat.dodajDoDepozytu('1000', 1, zl10i), wplaconychDoDepo()])
+    zl10b = Button(root2, width=25, height=2, text="10 złotych", command=lambda: [biletomat.dodajDoDepozytu('1000', 1, zl10i), wplaconychDoDepo()])
     wstawzl10b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(zl10i, '1000', sprawdzLiczbe(zl10i, blad_platnosci)), wplaconychDoDepo()])
     zl10i = Entry(root2, width=5)
 
-    zl10b.pack()
-    zl10i.pack()
-    wstawzl10b.pack()
+    zl10b.grid(row=22, column=0)
+    zl10i.grid(row=22, column=1)
+    wstawzl10b.grid(row=22, column=2)
 
     # ----------------------------20 złotych----------------------------
-    zl20b = Button(root2, text="20 złotych", command=lambda: [biletomat.dodajDoDepozytu('2000', 1, zl20i), wplaconychDoDepo()])
+    zl20b = Button(root2, width=25, height=2, text="20 złotych", command=lambda: [biletomat.dodajDoDepozytu('2000', 1, zl20i), wplaconychDoDepo()])
     wstawzl20b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(zl20i, '2000', sprawdzLiczbe(zl20i, blad_platnosci)), wplaconychDoDepo()])
     zl20i = Entry(root2, width=5)
 
-    zl20b.pack()
-    zl20i.pack()
-    wstawzl20b.pack()
+    zl20b.grid(row=24, column=0)
+    zl20i.grid(row=24, column=1)
+    wstawzl20b.grid(row=24, column=2)
 
     # ----------------------------50 złotych----------------------------
-    zl50b = Button(root2, text="50 złotych", command=lambda: [biletomat.dodajDoDepozytu('5000', 1, zl50i), wplaconychDoDepo()])
+    zl50b = Button(root2, width=25, height=2, text="50 złotych", command=lambda: [biletomat.dodajDoDepozytu('5000', 1, zl50i), wplaconychDoDepo()])
     wstawzl50b = Button(root2, text=tekstGuzikaDodaj, command=lambda: [biletomat.dodajMonetePole(zl50i, '5000', sprawdzLiczbe(zl50i, blad_platnosci)), wplaconychDoDepo()])
     zl50i = Entry(root2, width=5)
 
-    zl50b.pack()
-    zl50i.pack()
-    wstawzl50b.pack()
+    zl50b.grid(row=26, column=0)
+    zl50i.grid(row=26, column=1)
+    wstawzl50b.grid(row=26, column=2)
 
     zaplac = Button(root2, text="Zapłać", command=lambda: [biletomat.zaplac(zwrocCene()), informacjaZakupowa(root, root2)])
-    zaplac.pack()
+    zaplac.grid(row=28, column=0)
 
     root2.mainloop()
 
@@ -299,17 +302,17 @@ bilet[next(generujLiczbeBiletow)] = Bilety("60 minutowy", "normalny", Decimal('6
 root = Tk()
 
 root.title("Automat biletowy MPK")
-root.geometry("600x650")
+root.geometry("400x400")
 
 label = Label(root, font=30)
 powitaj(label)
-label.pack()
+label.grid(row=1, column=0)
 
 blad_biletow = Label(root, text="", font=30)
-blad_biletow.pack()
+blad_biletow.grid(row=2, column=0)
 
 label2 = Label(root, text="Do zapłacenia: " + str(zwrocCene()) + " zł", font=30, anchor='s')
-label2.pack()
+label2.grid(row=3, column=0)
 
 # Zmienne dla przycisków w biletomacie zostały utworzone w podobnej zasadzie. Przycisk ulg20b odpowiedzialny jest za dodanie biletu
 # ulgowego 20-minutowego. Przycisk ten wywołuje funkcje dodajbilet, który przekazuje ilość biletów pobranych z inputa do danego obiektu,
@@ -320,61 +323,60 @@ label2.pack()
 # Dodatkowo przekazujemy etykietę blad_biletow, aby wyświetił do niej informację po tym jak użytkownik poda nieprawidłową wartość.
 
 # ----------------------------20-minutowy ulgowy----------------------------
-ulg20b = Button(root, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajBilet(ulg20i), kosztZakupow(label2)])
+ulg20b = Button(root, width=25, height=2, text="20-minutowy ulgowy [1,50 zł]", command=lambda: [bilet[0].dodajBilet(ulg20i), kosztZakupow(label2)])
 wstawulg20b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[0].dodajBiletPole(ulg20i, sprawdzLiczbe(ulg20i, blad_biletow)), kosztZakupow(label2)])
-ulg20i = Entry(root, width=5)
-
-ulg20b.pack()
-ulg20i.pack()
-wstawulg20b.pack()
+ulg20i = Entry(root, width=10)
+ulg20b.grid(row=4, column=0)
+ulg20i.grid(row=4, column=1)
+wstawulg20b.grid(row=4, column=2)
 
 # ----------------------------40-minutowy ulogwy----------------------------
-ulg40b = Button(root, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajBilet(ulg40i), kosztZakupow(label2)])
+ulg40b = Button(root, width=25, height=2, text="40-minutowy ulgowy [2,50 zł]", command=lambda: [bilet[1].dodajBilet(ulg40i), kosztZakupow(label2)])
 wstawulg40b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[1].dodajBiletPole(ulg40i, sprawdzLiczbe(ulg40i, blad_biletow)), kosztZakupow(label2)])
-ulg40i = Entry(root, width=5)
+ulg40i = Entry(root, width=10)
 
-ulg40b.pack()
-ulg40i.pack()
-wstawulg40b.pack()
+ulg40b.grid(row=6, column=0)
+ulg40i.grid(row=6, column=1)
+wstawulg40b.grid(row=6, column=2)
 
 # ----------------------------60-minutowy ulgowy----------------------------
-ulg60b = Button(root, text="60-minutowy ulgowy [3 zł]", command=lambda: [bilet[2].dodajBilet(ulg60i), kosztZakupow(label2)])
+ulg60b = Button(root, width=25, height=2, text="60-minutowy ulgowy [3 zł]", command=lambda: [bilet[2].dodajBilet(ulg60i), kosztZakupow(label2)])
 wstawulg60b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[2].dodajBiletPole(ulg60i, sprawdzLiczbe(ulg60i, blad_biletow)), kosztZakupow(label2)])
-ulg60i = Entry(root, width=5)
+ulg60i = Entry(root, width=10)
 
-ulg60b.pack()
-ulg60i.pack()
-wstawulg60b.pack()
+ulg60b.grid(row=8, column=0)
+ulg60i.grid(row=8, column=1)
+wstawulg60b.grid(row=8, column=2)
 
 # ----------------------------20-minutowy normalny----------------------------
-norm20b = Button(root, text="20-minutowy normalny [2,25 zł]", command=lambda: [bilet[3].dodajBilet(norm20i), kosztZakupow(label2)])
+norm20b = Button(root, width=25, height=2, text="20-minutowy normalny [2,25 zł]", command=lambda: [bilet[3].dodajBilet(norm20i), kosztZakupow(label2)])
 wstawnorm20b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[3].dodajBiletPole(norm20i, sprawdzLiczbe(norm20i, blad_biletow)), kosztZakupow(label2)])
-norm20i = Entry(root, width=5)
+norm20i = Entry(root, width=10)
 
-norm20b.pack()
-norm20i.pack()
-wstawnorm20b.pack()
+norm20b.grid(row=10, column=0)
+norm20i.grid(row=10, column=1)
+wstawnorm20b.grid(row=10, column=2)
 
 # ----------------------------40-minutowy normalny----------------------------
-norm40b = Button(root, text="40-minutowy normalny [4,40 zł]", command=lambda: [bilet[4].dodajBilet(norm40i), kosztZakupow(label2)])
+norm40b = Button(root, width=25, height=2, text="40-minutowy normalny [4,40 zł]", command=lambda: [bilet[4].dodajBilet(norm40i), kosztZakupow(label2)])
 wstawnorm40b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[4].dodajBiletPole(norm40i, sprawdzLiczbe(norm40i, blad_biletow)), kosztZakupow(label2)])
-norm40i = Entry(root, width=5)
+norm40i = Entry(root, width=10)
 
-norm40b.pack()
-norm40i.pack()
-wstawnorm40b.pack()
+norm40b.grid(row=12, column=0)
+norm40i.grid(row=12, column=1)
+wstawnorm40b.grid(row=12, column=2)
 
 # ----------------------------60-mininutowy normalny----------------------------
-norm60b = Button( root, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajBilet(norm60i), kosztZakupow(label2)])
+norm60b = Button( root, width=25, height=2, text="60-minutowy normalny [6 zł]", command=lambda: [bilet[5].dodajBilet(norm60i), kosztZakupow(label2)])
 wstawnorm60b = Button(root, text=tekstGuzikaDodaj, command=lambda: [bilet[5].dodajBiletPole(norm60i, sprawdzLiczbe(norm60i, blad_biletow)), kosztZakupow(label2)])
-norm60i = Entry(root, width=5)
+norm60i = Entry(root, width=10)
 
-norm60b.pack()
-norm60i.pack()
-wstawnorm60b.pack()
+norm60b.grid(row=14, column=0)
+norm60i.grid(row=14, column=1)
+wstawnorm60b.grid(row=14, column=2)
 
 # Po kliknięciu przycisku podsumuj zostanie wyświetlone okno z płatnościami
 podsumowanie = Button(root, text="Podsumuj", command=lambda: [otworzPlatnosci()])
-podsumowanie.pack()
+podsumowanie.grid(row=16, column=0)
 
 root.mainloop()
