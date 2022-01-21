@@ -48,9 +48,12 @@ class Bilety(przedmiot.Przedmiot):
         a następnie wysłać informację do obiektu o ilości wprowadzonych biletów.
         """
 
-        if ilosc < 0:
-            pass
-        else:
-            self._ile = ilosc
+        # if ilosc < 0:
+        #     pass
+        # else:
+        self._ile = ilosc
         typ.delete(0, END)
         typ.insert(0, self._ile)
+
+    def cenaWszystkichBiletow(self):
+        return self._ile * self._cena

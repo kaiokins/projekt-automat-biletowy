@@ -35,10 +35,10 @@ class Biletomat(p.PrzechowywaczMonet):
         a następnie wysłać informację do obiektu o ilości.
         """
 
-        if ilosc < 0:
-            pass
-        else:
-            self._depozyt[rodzaj] = ilosc
+        # if ilosc < 0:
+        #    pass
+        # else:
+        self._depozyt[rodzaj] = ilosc
         typ.delete(0, END)
         typ.insert(0, self._depozyt[rodzaj])
 

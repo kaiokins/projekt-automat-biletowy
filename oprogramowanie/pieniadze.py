@@ -15,8 +15,8 @@ class PrzechowywaczMonet:
                     self._pieniadze[str(k)] = int(v)
         except:
             print("Wystąpił błąd przy wczytywaniu pliku")
-        finally:
-            f.close()
+        # finally:
+        #   f.close()
 
     def zapiszPlik(self):
         """Metoda odpowiedzialna za zapisywanie do pliku ilości monet/banknotów po poprawnym wykonaniu wszystkich operacji transakcyjnych"""
@@ -27,8 +27,8 @@ class PrzechowywaczMonet:
                 [f.write('{0},{1}\n'.format(key, value)) for key, value in self._pieniadze.items()]
         except:
             print("Wystąpił błąd przy zapisywaniu pliku")
-        finally:
-            f.close()
+        # finally:
+        #    f.close()
 
     def __init__(self):
         """
@@ -69,6 +69,7 @@ class PrzechowywaczMonet:
         # o sumie 12 złotych i zapłaci 50-złotówką to wydamy mu 20, 10, 5, 2, 1 zł reszty.
         for i in range(12):
             while not ((int(moneta[i])) > doWydania) and ilosc[i] > 0:
+                # print(doWydania)
                 doWydania -= int(moneta[i])
                 ilosc[i] -= 1
                 reszta[i] += 1
