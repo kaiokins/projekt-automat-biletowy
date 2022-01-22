@@ -31,17 +31,18 @@ def powitaj(tekst):
     return "Proszę wybrać rodzaj biletu"
 
 
-def zwrocCene():
+def zwrocCene(listaBiletow):
     """Funkcja zwraca cenę biletów wybranych przez użytkownika (sumuje)"""
     suma = 0
-    for i in range(len(bilet)):
-        suma = suma + bilet[i].zwrocCene() * bilet[i].zwrocIlosc()
+    for i in range(len(listaBiletow)):
+        suma = suma + listaBiletow[i].zwrocCene() * listaBiletow[i].zwrocIlosc()
     return suma
+
 
 
 def kosztZakupow(etykieta):
     """Funkcja pokazuje ile użytkownik musi zapłacić"""
-    etykieta['text'] = "Do zapłacenia: " + str(zwrocCene()) + " zł"
+    etykieta['text'] = "Do zapłacenia: " + str(zwrocCene(bilet)) + " zł"
 
 
 def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
@@ -77,7 +78,7 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
 
         if biletomat.czyZostalaReszta() == 1:
             biletomat.zwrocReszte()
-            jakieBiletyZakupil['text'] = info + "\n Wydano " + str(biletomat.sumaDepo() - zwrocCene()) + " zł reszty"
+            jakieBiletyZakupil['text'] = info + "\n Wydano " + str(biletomat.sumaDepo() - zwrocCene(bilet)) + " zł reszty"
             jakieBiletyZakupil.pack()
         else:
             jakieBiletyZakupil['text'] = info
@@ -98,7 +99,7 @@ def informacjaZakupowa(zamknijOknoBiletow, zamknijOknoPlatnosci):
         # Gdy klient wrzuci za mało banknotów to zostanie o tym poinformowany.
         # Wyświetli się informacje ile jeszcze należy wrzucić.
 
-        jakieBiletyZakupil['text'] = "Wrzuciłeś za mało banknotów. Brakuje " + str(math.fabs(biletomat.sumaDepo() - zwrocCene())) + " zł"
+        jakieBiletyZakupil['text'] = "Wrzuciłeś za mało banknotów. Brakuje " + str(math.fabs(biletomat.sumaDepo() - zwrocCene(bilet))) + " zł"
     else:
         jakieBiletyZakupil['text'] = "Upsss... coś poszło źle"
         jakieBiletyZakupil.pack()
@@ -275,7 +276,7 @@ def otworzPlatnosci():
     zl50i.grid(row=26, column=1)
     wstawzl50b.grid(row=26, column=2)
 
-    zaplac = Button(root2, text="Zapłać", command=lambda: [biletomat.zaplac(zwrocCene()), informacjaZakupowa(root, root2)])
+    zaplac = Button(root2, text="Zapłać", command=lambda: [biletomat.zaplac(zwrocCene(bilet)), informacjaZakupowa(root, root2)])
     zaplac.grid(row=28, column=0)
 
     root2.mainloop()
@@ -311,7 +312,7 @@ label.grid(row=1, column=0)
 blad_biletow = Label(root, text="", font=30)
 blad_biletow.grid(row=2, column=0)
 
-label2 = Label(root, text="Do zapłacenia: " + str(zwrocCene()) + " zł", font=30, anchor='s')
+label2 = Label(root, text="Do zapłacenia: " + str(zwrocCene(bilet)) + " zł", font=30, anchor='s')
 label2.grid(row=3, column=0)
 
 # Zmienne dla przycisków w biletomacie zostały utworzone w podobnej zasadzie. Przycisk ulg20b odpowiedzialny jest za dodanie biletu
